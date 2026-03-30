@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
-    <title>Series</title>
+    <title>Home</title>
 </head>
 
 <body>
@@ -38,16 +38,50 @@
             </ul>
         </nav>
 
-        <h2 class="alert alert-warning">Todas las series</h2>
-        <form class="filter-form px-0 mb-3" action="" method="get">
-            <input type="text" name="filter" id="" placeholder="Buscar dentro de la lista">
-        </form>
-        
-        <button class="btn btn-warning">Cargar más</button>
-        
-        <section class="row cards all-series" id="series">
+        <h2 class="alert alert-primary">Películas favoritas</h2>
+        <section class="row cards" id="movies">
+            <article class="single-card-movie">
+                <img src="https://image.tmdb.org/t/p/w500/9PXZIUsSDh4alB80jheWX4fhZmy.jpg" class="card-img-top"
+                    alt="...">
+                <div class="cardBody">
+                    <h5 class="card-title">F1</h5>
+                    <p class="card-text">Racing legend Sonny Hayes is coaxed out of retirement to lead a struggling
+                        Formula 1 team—and mentor a young hotshot driver—while chasing one more chance at glory.</p>
+                    <a href="movie.html" class="btn btn-primary">Ver más</a>
+                    <a href="" class="btn alert-info">♥️</a>
+                </div>
+            </article>
+            <article class="single-card-movie">
+                <img src="https://image.tmdb.org/t/p/w500/A06yXys3hrCWu8xiNoHCFLTG5SH.jpg" class="card-img-top"
+                    alt="...">
+                <div class="cardBody">
+                    <h5 class="card-title">I Know What You Did Last Summer</h5>
+                    <p class="card-text">When five friends inadvertently cause a deadly car accident, they cover up
+                        their involvement and make a pact to keep it a secret rather than face the consequences. A year
+                        later, their past comes back to haunt them and they're forced to confront a horrifying truth:
+                        someone knows what they did last summer…and is hell-bent on revenge.</p>
+                    <a href="movie.html" class="btn btn-primary">Ver más</a>
+                    <a href="" class="btn alert-info">♥️</a>
+                </div>
+            </article>
+            <article class="single-card-movie">
+                <img src="https://image.tmdb.org/t/p/w500/ombsmhYUqR4qqOLOxAyr5V8hbyv.jpg" class="card-img-top"
+                    alt="...">
+                <div class="cardBody">
+                    <h5 class="card-title">Superman</h5>
+                    <p class="card-text">Superman, a journalist in Metropolis, embarks on a journey to reconcile his
+                        Kryptonian heritage with his human upbringing as Clark Kent.</p>
+                    <a href="movie.html" class="btn btn-primary">Ver más</a>
+                    <a href="" class="btn alert-info">♥️</a>
+                </div>
+            </article>
+        </section>
+
+        <h2 class="alert alert-warning">Series favoritas</h2>
+        <section class="row cards" id="tv-show">
             <article class="single-card-tv">
-                <img src="https://image.tmdb.org/t/p/w500/9mYeRoWguq5etbwJRdF8BXFKiF.jpg" class="card-img-top" alt="...">
+                <img src="https://image.tmdb.org/t/p/w500/9mYeRoWguq5etbwJRdF8BXFKiF.jpg" class="card-img-top"
+                    alt="...">
                 <div class="cardBody">
                     <h5 class="card-title">The Terminal List: Dark Wolf</h5>
                     <p class="card-text">Before The Terminal List, Navy SEAL Ben Edwards finds himself entangled in the
@@ -55,20 +89,24 @@
                         to not give himself over to his darker impulses. Every man has two wolves inside him – light and
                         dark – fighting for control. Which wolf will Ben Edwards feed?</p>
                     <a href="serie.html" class="btn btn-primary">Ver más</a>
+                    <a href="" class="btn alert-warning">♥️</a>
                 </div>
             </article>
             <article class="single-card-tv">
-                <img src="https://image.tmdb.org/t/p/w500/yueXS3q8BtoWekcHOATFHicLl3e.jpg" class="card-img-top" alt="...">
+                <img src="https://image.tmdb.org/t/p/w500/yueXS3q8BtoWekcHOATFHicLl3e.jpg" class="card-img-top"
+                    alt="...">
                 <div class="cardBody">
                     <h5 class="card-title">Alien: Earth</h5>
                     <p class="card-text">When the mysterious deep space research vessel USCSS Maginot crash-lands on
                         Earth, Wendy and a ragtag group of tactical soldiers make a fateful discovery that puts them
                         face-to-face with the planet's greatest threat.</p>
                     <a href="serie.html" class="btn btn-primary">Ver más</a>
+                    <a href="" class="btn alert-warning">♥️</a>
                 </div>
             </article>
             <article class="single-card-tv">
-                <img src="https://image.tmdb.org/t/p/w500/yb4F1Oocq8GfQt6iIuAgYEBokhG.jpg" class="card-img-top" alt="...">
+                <img src="https://image.tmdb.org/t/p/w500/yb4F1Oocq8GfQt6iIuAgYEBokhG.jpg" class="card-img-top"
+                    alt="...">
                 <div class="cardBody">
                     <h5 class="card-title">Peacemaker</h5>
                     <p class="card-text">The continuing story of Peacemaker, a vainglorious superhero/supervillain who
@@ -76,40 +114,16 @@
                         recovery from his duel with Bloodsport, Peacemaker soon discovers that his freedom comes at a
                         price.</p>
                     <a href="serie.html" class="btn btn-primary">Ver más</a>
-                </div>
-            </article>
-            <article class="single-card-tv">
-                <img src="https://image.tmdb.org/t/p/w500/6TPGDrU9MyWbn2TpggJphVAVXiq.jpg" class="card-img-top" alt="...">
-                <div class="cardBody">
-                    <h5 class="card-title">Upload</h5>
-                    <p class="card-text">In 2033, people who are near death can be “uploaded” into virtual reality
-                        hotels run by 6 tech firms. Cash-strapped Nora lives in Brooklyn and works customer service for
-                        the luxurious “Lakeview” digital afterlife. When L.A. party-boy/coder Nathan’s self-driving car
-                        crashes, his high-maintenance girlfriend uploads him permanently into Nora’s VR world.</p>
-                    <a href="serie.html" class="btn btn-primary">Ver más</a>
-                </div>
-            </article>
-            <article class="single-card-tv">
-                <img src="https://image.tmdb.org/t/p/w500/3m1UaMLgmpj6krNaQwTpftYFsnz.jpg" class="card-img-top" alt="...">
-                <div class="cardBody">
-                    <h5 class="card-title">A Record of a Mortal's Journey to Immortality</h5>
-                    <p class="card-text">A poor and ordinary boy from a village joins a minor sect in Jiang Hu and
-                        becomes an Unofficial Disciple by chance. How will Han Li, a commoner by birth, establish a
-                        foothold for himself in his sect? With his mediocre aptitude, he must successfully traverse the
-                        treacherous path of cultivation and avoid the notice of those who may do him harm. This is a
-                        story of an ordinary mortal who, against all odds, clashes with devilish demons and ancient
-                        celestials in order to find his own path towards immortality.</p>
-                    <a href="serie.html" class="btn btn-primary">Ver más</a>
+                    <a href="" class="btn alert-warning">♥️</a>
                 </div>
             </article>
             
-        </section>
 
-       
+        </section>
     </div>
 
     <footer class="alert alert-primary mt-4 text-center">
-            <p class="mb-0">Agustina Sambucetti | Micaela Son | Pia Ivancovich</p>
+            <p class="mb-0">Integrante 1 | Integrante 2 | Integrante 3</p>
         </footer>
     </div>
 
