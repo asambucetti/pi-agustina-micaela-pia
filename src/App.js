@@ -1,5 +1,6 @@
 
 import logo from './logo.svg';
+import NotFound from "./screens/NotFound"
 import Header from './components/Header/Header'
 import './App.css';
 
