@@ -15,6 +15,7 @@ nav {
 .nav a:hover{
     font-weight: bold;
 }
+
 .search-form, .filter-form {
     padding: .5rem 0;
     margin-bottom: 20px;

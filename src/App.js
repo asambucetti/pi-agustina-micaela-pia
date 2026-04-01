@@ -1,11 +1,10 @@
-
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import NotFound from "./screens/NotFound";
 import Header from './components/Header/Header';
 import Home from './screens/Home/Home';
+import { Switch, Route } from 'react-router-dom';
 import Peliculas from './components/Peliculas/Peliculas';
 import Series from './components/Series/Series';
+import NotFound from './screens/NotFound/NotFound';
 import './App.css';
 
 
@@ -20,16 +19,22 @@ function App() {
         </ul>
       </nav>
 
+
+      <Home />
+
+
       <Switch>
         <Route path="/" exact={true} component={Home} />
-        {/*  <Route path="/Login" component={Login} /> */}
-        {/* <Route path="/CrearCuenta" component={CrearCuenta} /> */}
-        {/* <Route path="/Favoritos" component={Favoritos} /> */}
+   {/*  <Route path="/Login" component={Login} />
+        <Route path="/Register" component={Register} />
+        <Route path="/Favoritos" component={Favoritos} />  */}
         <Route path="" component={NotFound} />
       </Switch>
 
       <Peliculas />
       <Series />
+
+      <NotFound />
 
       <footer className="alert alert-primary mt-4 text-center">
         <p className="mb-0">Agustina Sambucetti | Micaela Son | Pia Ivancovich</p>

@@ -8,7 +8,7 @@ function Peliculas(props) {
   return (
    <div class="container">
         <h2 class="alert alert-primary">Todas las películas</h2>
-        <Filter/>
+        <Filtro/>
 
         <button class="btn btn-info">Cargar más</button>
 
