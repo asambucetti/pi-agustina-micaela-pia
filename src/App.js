@@ -6,6 +6,7 @@ import Peliculas from './components/Peliculas/Peliculas';
 import Series from './components/Series/Series';
 import NotFound from './screens/NotFound/NotFound';
 import './App.css';
+import SearchResults from './screens/SearchResults/SearchResults';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
    {/*  <Route path="/Login" component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/Favoritos" component={Favoritos} />  */}
+        <Route path="/SearchResults/:nombre" component={SearchResults} />
         <Route path="" component={NotFound} />
       </Switch>
 
