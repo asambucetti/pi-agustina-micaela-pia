@@ -51,7 +51,7 @@ class SearchResults extends Component {
                             {this.state.datos.length === 0 ? <h3>No hay resultados</h3> : this.state.peliculas.map((peliculas, idx) => <Peliculas info={peliculas} key={idx} />)}
                         </section>
                         <section className='searchResults'>
-                            {this.state.datos.length === 0 ? <h3>No hay resultados</h3> : this.state.series.map((series, idx) => <Series info={peliculas} key={idx} />)}
+                            {this.state.datos.length === 0 ? <h3>No hay resultados</h3> : this.state.series.map((series, idx) => <Series info={series} key={idx} />)}
                         </section>
                     </>
                 )}

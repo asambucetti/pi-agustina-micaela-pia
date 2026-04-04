@@ -33,10 +33,8 @@ function App() {
         <Route path="" component={NotFound} />
       </Switch>
 
-      <Peliculas />
-      <Series />
 
-      <NotFound />
+  
 
       <footer className="alert alert-primary mt-4 text-center">
         <p className="mb-0">Agustina Sambucetti | Micaela Son | Pia Ivancovich</p>
