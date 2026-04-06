@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import Home from './screens/Home/Home';
 import { Switch, Route } from 'react-router-dom';
 import Peliculas from './components/Peliculas/Peliculas';
@@ -28,18 +29,15 @@ function App() {
         <Route path="/" exact={true} component={Home} />
    {/*  <Route path="/Login" component={Login} />
         <Route path="/Register" component={Register} />
-        <Route path="/Favoritos" component={Favoritos} />  */}
+        <Route path="/Favorites" component={Favoritos} />
+        <Route path="/Peliculas" component={Peliculas} />
+        <Route path="/Series" component={Series} />  */}
         <Route path="/SearchResults/:nombre" component={SearchResults} />
         <Route path="" component={NotFound} />
       </Switch>
 
-
-  
-
-      <footer className="alert alert-primary mt-4 text-center">
-        <p className="mb-0">Agustina Sambucetti | Micaela Son | Pia Ivancovich</p>
-      </footer>
-
+      
+      <Footer/>
     </div>
   );
 }

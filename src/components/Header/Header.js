@@ -1,27 +1,41 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Header(props) {
+function Header() {
+  function sesionExistente() {
+    return document.cookie !== "";
+  }
+
   return (
     <nav>
-      <ul class="nav nav-tabs my-4">
-        <li class="nav-item">
-          <a class="nav-link" href="index.html">Home</a>
+      <ul className="nav nav-tabs my-4">
+        <li className="nav-item">
+          <Link className="nav-link" to="/">Home</Link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="movies.html">Películas</a>
+        <li className="nav-item">
+          <Link className="nav-link" to="/Peliculas">Películas</Link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="series.html">Series</a>
+        <li className="nav-item">
+          <Link className="nav-link" to="/Series">Series</Link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="favorites.html">Favoritas</a>
-        </li>
-        <li class="nav-item ml-auto">
-          <a class="nav-link" href="register.html">Registro</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.html">Login</a>
-        </li>
+
+        {sesionExistente() ?
+          (<li className="nav-item">
+            <Link className="nav-link" to="/Favorites">Favoritas</Link>
+          </li>
+          ) : null}
+
+        {!sesionExistente() ? (
+          <>
+            <li className="nav-item ml-auto">
+              <Link className="nav-link" to="/Register">Registro</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/Login">Login</Link>
+            </li>
+          </>
+        ) : null}
+
       </ul>
     </nav>
   );
