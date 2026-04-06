@@ -47,10 +47,10 @@ class SearchResults extends Component {
             <>
                 {this.state.loading ? (<h2>Cargando...</h2>) : (
                     <>
-                        <section className='searchResults'>
+                        <section className='card-body'>
                             {this.state.datos.length === 0 ? <h3>No hay resultados</h3> : this.state.peliculas.map((peliculas, idx) => <Peliculas info={peliculas} key={idx} />)}
                         </section>
-                        <section className='searchResults'>
+                        <section className='card-body'>
                             {this.state.datos.length === 0 ? <h3>No hay resultados</h3> : this.state.series.map((series, idx) => <Series info={series} key={idx} />)}
                         </section>
                     </>
