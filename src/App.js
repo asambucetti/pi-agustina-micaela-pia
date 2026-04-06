@@ -8,6 +8,7 @@ import Series from './components/Series/Series';
 import NotFound from './screens/NotFound/NotFound';
 import './App.css';
 import SearchResults from './screens/SearchResults/SearchResults';
+import Favoritos from './screens/Favoritos/Favoritos';
 
 
 function App() {

@@ -9,7 +9,7 @@ function Series(props) {
         <div className="container">
             <h2 className="alert alert-warning">Todas las series</h2>
 
-            <Filter />
+            <Filtro />
 
             <button className="btn btn-warning">Cargar más</button>
 
