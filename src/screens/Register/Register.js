@@ -58,6 +58,7 @@ class Register extends Component {
 
        let storageString = JSON.stringify(storage)
 
+       /*Dos parametros, clave y valor. Ejemplo: Storage: "[{ email: 'pia@mail.com', password: '123456' }]" */
        localStorage.setItem ('storage', storageString)
        
        /*creo mi cookie:*/
