@@ -8,7 +8,7 @@ function Card(props) {
 
     return (
         <article className="single-card-movie">
-            <img className="card-img-top" src={props.imagen} alt={props.titulo} />
+            <img className="card-img-top" src={props.img} alt={props.titulo} />
             <div class="cardBody">
                 <h5 className="card-title">{props.titulo}</h5>
                 <p className="card-text">{props.descripcion}</p>
@@ -26,3 +26,6 @@ function Card(props) {
 }
 
 export default Card;
+
+
+{/* esta seria la resolucion de card con el api key hecho; comentario de peliculas.js */}

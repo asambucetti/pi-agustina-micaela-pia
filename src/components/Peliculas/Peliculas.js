@@ -49,3 +49,46 @@ function Peliculas() {
 }
 
 export default Peliculas;
+
+
+
+{/* 
+import React, { Component } from 'react';
+import Card from '../Card/Card';
+
+class Peliculas extends Component {
+    constructor() {
+        super();
+        this.state = {
+            peliculas: []
+        };
+    }
+
+    componentDidMount() {
+        fetch("https://api.themoviedb.org/3/movie/popular?api_key=TU_API_KEY")
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    peliculas: data.results
+                });
+            })
+            .catch(error => console.log(error));
+    }
+
+    render() {
+        return (
+            <section className="row">
+                {this.state.peliculas.map((peli, idx) => (
+                    <Card
+                        key={idx}
+                        titulo={peli.title}
+                        descripcion={peli.overview}
+                        imagen={`https://image.tmdb.org/t/p/w500/${peli.poster_path}`}
+                    />
+                ))}
+            </section>
+        );
+    }
+}
+
+export default Peliculas; */}
