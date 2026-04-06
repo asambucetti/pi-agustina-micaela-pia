@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function Card(props) {
     let sesionExiste = localStorage.getItem("usuario");
 
-
+    const apiKey = "5c6cfdfae06798b19907f4b6448f6847"
 
     return (
         <article className="single-card-movie">
