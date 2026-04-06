@@ -39,8 +39,29 @@ class Register extends Component {
        let mailExistente = false
        /*me falta como comprobar no se si hacer un for o que */
 
+       /*Cambio el estado de error */
+       if (mailExistente){
+        this.setState({error: "Email ya registrado"});
+       }
+
+       /*Minimo 6 caracteres */
+       if (this.state.password.lenght < 6){
+        this.setState({error: "Mínimo 6 caracteres"});
+       }
+
+       let usuarioNuevo = {
+        email: this.state.email,
+        password: this.state.password
+       };
+
+       storage.push(usuarioNuevo);
+
+       let storageString = JSON.stringify(storage)
+
+       localStorage.setItem ('storage', storageString)
        
-       
+       /*creo mi cookie:*/
+       document.cookie = "sesion-true";
     }
 
 
