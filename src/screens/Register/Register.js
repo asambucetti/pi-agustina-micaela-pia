@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 class Register extends Component {
     constructor(props) {
@@ -38,7 +39,11 @@ class Register extends Component {
 
         /* VALIDACIONES */
         let mailExistente = false
-        /*me falta como comprobar no se si hacer un for o que */
+        for (let i = 0; i < storage.lenght; i++ ){
+            if (storage[i].email === this.state.email){
+                mailExistente = true
+            }
+        }
 
         /*Cambio el estado de error */
         if (mailExistente) {
@@ -96,7 +101,7 @@ class Register extends Component {
 
                         <button type="submit" className="btn btn-primary btn-block">Register</button>
                     </form>
-                    <p className="mt-3 text-center">¿Ya tenés cuenta? <a href="login.html">Iniciar sesión</a></p>
+                    <p className="mt-3 text-center">¿Ya tenés cuenta? <Link to="/Login">Iniciar sesión</Link></p>
                     {this.state.error != "" ? <p>{this.state.error}</p> : null}
                 </div>
             </div>
