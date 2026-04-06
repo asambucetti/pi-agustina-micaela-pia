@@ -28,9 +28,9 @@ class Buscador extends Component {
     render() {
         return (
             <>
-                <form onSubmit={(event) => this.evitarSubmit(event)} >
-                    <input type="text" placeholder="Buscar.." onChange={(event) => this.controlarCambios(event)} value={this.state.valor} />
-                    <button type="submit">Buscar</button>
+                <form className="search-form" onSubmit={(event) => this.evitarSubmit(event)} >
+                    <input type="text" placeholder="Buscar..." onChange={(event) => this.controlarCambios(event)} value={this.state.valor} />
+                    <button type="submit" className="btn btn-success btn-sm">Buscar</button>
                 </form>
             </>
         )
