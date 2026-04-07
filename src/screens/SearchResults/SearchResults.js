@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import Peliculas from '../../components/Peliculas/Peliculas';
 import Series from '../../components/Series/Series';
 
+const apiKey = "5c6cfdfae06798b19907f4b6448f6847"
+
+
 class SearchResults extends Component {
 
     constructor(props) {
@@ -17,7 +20,6 @@ class SearchResults extends Component {
 
     componentDidMount() {
         const valor = this.props.match.params.valor;
-        const apiKey = "5c6cfdfae06798b19907f4b6448f6847"
 
         /*hago dos fetch, primero el de peliculas y despues el de series*/
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&q=${valor}`)
@@ -46,12 +48,12 @@ class SearchResults extends Component {
     render() {
         return (
             <>
-            <div className="container">
+                <div className="container">
 
-            </div>
+                </div>
                 {this.state.loading ? (<h2>Cargando...</h2>) : (
                     <>
-                    <h2 className="alert alert-primary">Resultados de películas</h2>
+                        <h2 className="alert alert-primary">Resultados de películas</h2>
                         <section className="row cards">
                             {this.state.peliculas.length === 0 ? <h3>No hay resultados</h3> : this.state.peliculas.map((peliculas, idx) => <Peliculas info={peliculas} key={idx} />)}
                         </section>
@@ -63,7 +65,8 @@ class SearchResults extends Component {
                     </>
                 )}
             </>
-        )}
+        )
+    }
 }
 
 export default SearchResults;

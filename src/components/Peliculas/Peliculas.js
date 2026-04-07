@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Card from '../Card/Card';
 
+const apiKey = "5c6cfdfae06798b19907f4b6448f6847";
+
+
 class Peliculas extends Component {
 
     constructor() {
@@ -11,8 +14,6 @@ class Peliculas extends Component {
     }
 
     componentDidMount() {
-        const apiKey = "5c6cfdfae06798b19907f4b6448f6847";
-    
 
         fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`)
             .then(res => res.json())
