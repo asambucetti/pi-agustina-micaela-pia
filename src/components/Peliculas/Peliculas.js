@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Card from '../Card/Card';
 
-const apiKey = "5c6cfdfae06798b19907f4b6448f6847"
-
 class Peliculas extends Component {
 
     constructor() {
@@ -13,7 +11,10 @@ class Peliculas extends Component {
     }
 
     componentDidMount() {
-        fetch("https://api.themoviedb.org/3/movie/popular?api_key={apiKey}")
+        const apiKey = "5c6cfdfae06798b19907f4b6448f6847";
+    
+
+        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`)
             .then(res => res.json())
             .then(data => {
                 this.setState({
@@ -29,9 +30,10 @@ class Peliculas extends Component {
                 {this.state.peliculas.map((peli, idx) => (
                     <Card
                         key={idx}
+                        id={peli.id}
                         titulo={peli.title}
                         descripcion={peli.overview}
-                        imagen={`https://image.tmdb.org/t/p/w500/${peli.poster_path}`}
+                        imagen={peli.poster_path}
                     />
                 ))}
             </section>
