@@ -1,31 +1,62 @@
-import React from 'react';
+
+
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import "./Card.css"
+class Card extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            textoBoton: "Ver descripción",
+            clase: "hide"
+        }
+    }
 
-function Card(props) {
-    let sesionExiste = localStorage.getItem("usuario");
+    cambio() {
+        if (this.state.textoBoton === "Ver descripción") {
+            this.setState({
+                textoBoton: "Ocultar descripción",
+                clase: "show"
+            })
+        } else {
+            this.setState({
+                textoBoton: "Ver descripción",
+                clase: "hide"
+            })
+        }
+    }
+    
+    sesionExiste() {
+        return document.cookie !== "";
+    }
 
-    const apiKey = "5c6cfdfae06798b19907f4b6448f6847"
 
-    return (
-        <article className="single-card-movie">
-            <img className="card-img-top" src={props.img} alt={props.titulo} />
-            <div class="cardBody">
-                <h5 className="card-title">{props.titulo}</h5>
-                <p className="card-text">{props.descripcion}</p>
-                {/* aca solo faltaria hacer que la descripcion aparezca y desaparezca (onClick) */}
-                <button>Ver descripción</button>
+    render() {
+        return (
+            <article className={this.props.clase}>
+                <img
+                    src={this.props.img}
+                    className="card-img-top"
+                    alt={this.props.titulo}
+                />
+                <div className="cardBody">
+                    <h5 className="card-title">{this.props.titulo}</h5>
 
-                <Link to={`/detalle/${props.id}`}>
-                    <button>Ir a detalle</button>
-                </Link>
+                    <p className={this.state.clase}>{this.props.descripcion}</p>
 
-                {sesionExiste ? <button>⭐</button> : null}
-            </div>
-        </article>
-    );
+                    <button onClick={() => this.cambio()}>
+                        {this.state.textoBoton}
+                    </button>
+
+                    <Link to={`/detalle/${this.props.id}`}>
+                        <button>Ir a detalle</button>
+                    </Link>
+
+                    {this.sesionExiste() ? <button>⭐</button> : null}
+                </div>
+            </article>
+        );
+    }
 }
 
 export default Card;
-
-
-{/* esta seria la resolucion de card con el api key hecho; comentario de peliculas.js */}

@@ -1,37 +1,110 @@
 
+import React, { Component } from 'react';
+import Card from '../../components/Card/Card';
+import Filtro from '../../components/Filtro/Filtro';
 
-import React from 'react';
-import { Link } from 'react-router-dom'
-import Filtro from '../../components/Filtro'
+const apiKey = "5c6cfdfae06798b19907f4b6448f6847";
+class Series extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      series: [],
+      pagina: 1,
+      busqueda: ''
+    };
+  }
 
-function Series(props) {
-    return (
-        <div className="container">
-            <h2 className="alert alert-warning">Todas las series</h2>
+  componentDidMount() {
 
-            <Filtro />
+    fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}`)
+      .then(response => response.json())
+      .then(data =>
+        this.setState({
+          series: data.results
+        })
+      )
+      .catch(error => console.log(error));
+  }
 
-            <button className="btn btn-warning">Cargar más</button>
+  cargarMas() {
+    let paginaSiguiente = this.state.pagina + 1;
 
-            <section className="row cards all-series" id="series">
-                <article className="single-card-tv">
-                    <img src="https://image.tmdb.org/t/p/w500/9mYeRoWguq5etbwJRdF8BXFKiF.jpg" className="card-img-top" alt="..." />
-                    <div class="cardBody">
-                        <h5 className="card-title">The Terminal List: Dark Wolf</h5>
-                        <p className="card-text">Before The Terminal List, Navy SEAL Ben Edwards finds himself entangled in the
-                            black operations side of the CIA. The deeper Ben goes into the 'gray', the harder it will become
-                            to not give himself over to his darker impulses. Every man has two wolves inside him – light and
-                            dark – fighting for control. Which wolf will Ben Edwards feed?</p>
-                        <button>Ver descripción</button>
-                        <button>Ir a detalle</button>
-                        <button>⭐</button>
-                    </div>
-                </article>
-            </section>
+    fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&page=${paginaSiguiente}`)
+      .then(response => response.json())
+      .then(data =>
+        this.setState({
+          series: this.state.series.concat(data.results),
+          pagina: paginaSiguiente
+        })
+      )
+      .catch(error => console.log(error));
+  }
 
+  evitarSubmit(event) {
+    event.preventDefault();
+  }
 
-        </div>
+  controlarCambios(event) {
+    this.setState({busqueda: event.target.value});
+  }
+
+  filtrarSeries(textoAFiltrar) {
+    return this.state.series.filter((serie) => serie.name.toLowerCase().includes(textoAFiltrar.toLowerCase())
     );
+  }
+
+  render() {
+      let seriesFiltradas = this.filtrarSeries(this.state.busqueda);
+    return (
+
+      <div className="container">
+        <h2 className="alert alert-warning">Todas las series</h2>
+  
+        <Filtro
+          controlarCambios={(event) => this.controlarCambios(event)}
+          evitarSubmit={(event) => this.evitarSubmit(event)}
+          valor={this.state.busqueda}
+        />
+        <button className="btn btn-warning" onClick={() => this.cargarMas()}>
+          Cargar más
+        </button>
+
+        <section className="row cards all-series" id="series">
+          {seriesFiltradas.map((serie, idx) => (
+            <Card
+              key={idx}
+              id={serie.id}
+              clase="single-card-tv"
+              img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
+              titulo={serie.name}
+              descripcion={serie.overview}
+            />
+          ))}
+        </section>
+      </div>
+    );
+  }
 }
 
 export default Series;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

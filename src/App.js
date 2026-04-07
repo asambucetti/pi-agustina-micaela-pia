@@ -9,12 +9,14 @@ import NotFound from './screens/NotFound/NotFound';
 import './App.css';
 import SearchResults from './screens/SearchResults/SearchResults';
 import Favoritos from './screens/Favoritos/Favoritos';
+import Login from './screens/Login/Login';
+import Register from './screens/Register/Register';
 
 
 function App() {
 
   return (
-    <div className="App">
+    <div className="container">
 
       <nav>
         <ul className="main-nav">
@@ -28,17 +30,17 @@ function App() {
 
       <Switch>
         <Route path="/" exact={true} component={Home} />
-   {/*  <Route path="/Login" component={Login} />
+        <Route path="/Login" component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/Favorites" component={Favoritos} />
         <Route path="/Peliculas" component={Peliculas} />
-        <Route path="/Series" component={Series} />  */}
+        <Route path="/Series" component={Series} />  
         <Route path="/SearchResults/:nombre" component={SearchResults} />
         <Route path="" component={NotFound} />
       </Switch>
 
-      
-      <Footer/>
+
+      <Footer />
     </div>
   );
 }

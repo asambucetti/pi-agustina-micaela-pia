@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 class Register extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class Register extends Component {
         /*primero debo traer lo que este guardado en el local storage a traves del metodo get,
         luego hago las validaciones necesarias y una vez que este todo correcto, recien ahi se crea
         la cuenta del usuario y se guarda en el localStorage la nueva cuenta creada */
-        let storage = locarlStorage.getItem('storage');
+        let storage = localStorage.getItem('storage');
 
         /*si existen usuarios guardados transformo el string en un array usable. 
         si es que no hay datos (else) creo un array para guardar los nuevos datos */

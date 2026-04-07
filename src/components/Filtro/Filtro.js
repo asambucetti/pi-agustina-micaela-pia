@@ -1,21 +1,16 @@
 
+import React, { Component } from 'react';
 
-import React from 'react';
-import { Link } from 'react-router-dom'
-
-function Filtro(props) {
-  return (
-    <div>
-     <form class="filter-form px-0 mb-3" action="" method="get">
-            <input type="text" name="filter" id="" placeholder="Buscar dentro de la lista"/>
-        </form>
-
-    </div>
-  );
+class Filtro extends Component {
+  render() {
+    return (
+      <form onSubmit={this.props.evitarSubmit} className="filter-form px-0 mb-3">
+        <input
+          type="text" placeholder="Buscar dentro de la lista" onChange={this.props.controlarCambios} value={this.props.valor}
+        />
+      </form>
+    );
+  }
 }
 
-
 export default Filtro;
-
-
-
