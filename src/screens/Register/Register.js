@@ -29,7 +29,7 @@ class Register extends Component {
 
         /*si existen usuarios guardados transformo el string en un array usable. 
         si es que no hay datos (else) creo un array para guardar los nuevos datos */
-        if (storage != null) {
+        if (storage !== null) {
             storage = JSON.parse(storage);
         }
         else {
@@ -97,7 +97,7 @@ class Register extends Component {
                         <button type="submit" className="btn btn-primary btn-block">Register</button>
                     </form>
                     <p className="mt-3 text-center">¿Ya tenés cuenta? <a href="login.html">Iniciar sesión</a></p>
-                    {this.state.error != "" ? <p>{this.state.error}</p> : null}
+                    {this.state.error !== "" ? <p>{this.state.error}</p> : null}
                 </div>
             </div>
         )
