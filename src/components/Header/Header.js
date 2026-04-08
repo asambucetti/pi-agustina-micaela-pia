@@ -8,6 +8,7 @@ function Header() {
 
   return (
     <nav>
+      <img/>
       <ul className="nav nav-tabs my-4">
         <li className="nav-item">
           <Link className="nav-link" to="/">Home</Link>
