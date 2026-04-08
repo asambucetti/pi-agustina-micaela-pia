@@ -19,7 +19,7 @@ class SearchResults extends Component {
     }
 
     componentDidMount() {
-        const valor = this.props.match.params.valor;
+        const valor = this.props.match.params.nombre;
 
         /*hago dos fetch, primero el de peliculas y despues el de series*/
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&q=${valor}`)
@@ -47,10 +47,9 @@ class SearchResults extends Component {
 
     render() {
         return (
-            <>
-                <div className="container">
+            <div className="container">
 
-                </div>
+                
                 {this.state.loading ? (<h2>Cargando...</h2>) : (
                     <>
                         <h2 className="alert alert-primary">Resultados de películas</h2>
@@ -64,7 +63,7 @@ class SearchResults extends Component {
                         </section>
                     </>
                 )}
-            </>
+            </div>
         )
     }
 }

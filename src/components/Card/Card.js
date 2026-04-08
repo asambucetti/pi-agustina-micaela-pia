@@ -88,7 +88,7 @@ class Card extends Component {
                 <div className="cardBody">
                     <h5 className="card-title">{this.props.titulo}</h5>
 
-                    <p className="card-text">{this.props.descripcion}</p>
+                    <p className={this.state.clase}>{this.props.descripcion}</p>
 
                     <button className="btn btn-primary"
                         onClick={() => this.cambioDescrip()}>

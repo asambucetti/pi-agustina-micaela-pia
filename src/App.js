@@ -25,8 +25,8 @@ function App() {
       </nav>
 
 
-      <Home />
-
+      
+    
 
       <Switch>
         <Route path="/" exact={true} component={Home} />
