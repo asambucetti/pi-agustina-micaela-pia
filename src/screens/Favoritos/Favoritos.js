@@ -1,122 +1,141 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 
-function Favoritos() {
-  return (<div className="container">
-      <h1>UdeSA Movies</h1>
+import React, { Component } from 'react';
+import Card from '../../components/Card/Card';
 
-      <h2 className="alert alert-primary">Películas favoritas</h2>
-      <section className="row cards" id="movies">
-        <article className="single-card-movie">
-          <img
-            src="https://image.tmdb.org/t/p/w500/9PXZIUsSDh4alB80jheWX4fhZmy.jpg"
-            className="card-img-top"
-            alt="..."
-          />
-          <div className="cardBody">
-            <h5 className="card-title">F1</h5>
-            <p className="card-text">
-              Racing legend Sonny Hayes is coaxed out of retirement to lead a struggling
-              Formula 1 team—and mentor a young hotshot driver—while chasing one more chance at glory.
-            </p>
-            <Link to="/movie" className="btn btn-primary">Ver más</Link>
-            <button className="btn alert-info">♥️</button>
-          </div>
-        </article>
+const apiKey = "5c6cfdfae06798b19907f4b6448f6847";
 
-        <article className="single-card-movie">
-          <img
-            src="https://image.tmdb.org/t/p/w500/A06yXys3hrCWu8xiNoHCFLTG5SH.jpg"
-            className="card-img-top"
-            alt="..."
-          />
-          <div className="cardBody">
-            <h5 className="card-title">I Know What You Did Last Summer</h5>
-            <p className="card-text">
-              When five friends inadvertently cause a deadly car accident, they cover up
-              their involvement and make a pact to keep it a secret rather than face the consequences.
-              A year later, their past comes back to haunt them and they're forced to confront a
-              horrifying truth: someone knows what they did last summer…and is hell-bent on revenge.
-            </p>
-            <Link to="/movie" className="btn btn-primary">Ver más</Link>
-            <button className="btn alert-info">♥️</button>
-          </div>
-        </article>
+class Favoritos extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            peliculasFavoritas: [],
+            seriesFavoritas: [],
+            cargandoPeliculas: true,
+            cargandoSeries: true
+        };
+    }
 
-        <article className="single-card-movie">
-          <img
-            src="https://image.tmdb.org/t/p/w500/ombsmhYUqR4qqOLOxAyr5V8hbyv.jpg"
-            className="card-img-top"
-            alt="..."
-          />
-          <div className="cardBody">
-            <h5 className="card-title">Superman</h5>
-            <p className="card-text">
-              Superman, a journalist in Metropolis, embarks on a journey to reconcile his
-              Kryptonian heritage with his human upbringing as Clark Kent.
-            </p>
-            <Link to="/movie" className="btn btn-primary">Ver más</Link>
-            <button className="btn alert-info">♥️</button>
-          </div>
-        </article>
-      </section>
+    componentDidMount() {
+        let storagePeliculas = localStorage.getItem("favoritosPeliculas");
+        storagePeliculas = JSON.parse(storagePeliculas);
 
-      <h2 className="alert alert-warning">Series favoritas</h2>
-      <section className="row cards" id="tv-show">
-        <article className="single-card-tv">
-          <img
-            src="https://image.tmdb.org/t/p/w500/9mYeRoWguq5etbwJRdF8BXFKiF.jpg"
-            className="card-img-top"
-            alt="..."
-          />
-          <div className="cardBody">
-            <h5 className="card-title">The Terminal List: Dark Wolf</h5>
-            <p className="card-text">
-              Before The Terminal List, Navy SEAL Ben Edwards finds himself entangled in the
-              black operations side of the CIA. The deeper Ben goes into the 'gray', the harder it
-              will become to not give himself over to his darker impulses.
-            </p>
-            <Link to="/serie" className="btn btn-primary">Ver más</Link>
-            <button className="btn alert-warning">♥️</button>
-          </div>
-        </article>
+        if (storagePeliculas === null ) {
+            this.setState({
+                peliculasFavoritas: [],
+                cargandoPeliculas: false
+            });
 
-        <article className="single-card-tv">
-          <img
-            src="https://image.tmdb.org/t/p/w500/yueXS3q8BtoWekcHOATFHicLl3e.jpg"
-            className="card-img-top"
-            alt="..."
-          />
-          <div className="cardBody">
-            <h5 className="card-title">Alien: Earth</h5>
-            <p className="card-text">
-              When the mysterious deep space research vessel USCSS Maginot crash-lands on
-              Earth, Wendy and a ragtag group of tactical soldiers make a fateful discovery that
-              puts them face-to-face with the planet's greatest threat.
-            </p>
-            <Link to="/serie" className="btn btn-primary">Ver más</Link>
-            <button className="btn alert-warning">♥️</button>
-          </div>
-        </article>
+        } else {
+            let peliculasRecuperadas = [];
 
-        <article className="single-card-tv">
-          <img
-            src="https://image.tmdb.org/t/p/w500/yb4F1Oocq8GfQt6iIuAgYEBokhG.jpg"
-            className="card-img-top"
-            alt="..."
-          />
-          <div className="cardBody">
-            <h5 className="card-title">Peacemaker</h5>
-            <p className="card-text">
-              The continuing story of Peacemaker, a vainglorious superhero/supervillain who
-              believes in peace at any cost — no matter how many people he has to kill.
-            </p>
-            <Link to="/serie" className="btn btn-primary">Ver más</Link>
-            <button className="btn alert-warning">♥️</button>
-          </div>
-        </article>
-      </section>
-    </div> );
+            for (let i = 0; i < storagePeliculas.length; i++) {
+                fetch(`https://api.themoviedb.org/3/movie/${storagePeliculas[i]}?api_key=${apiKey}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        peliculasRecuperadas.push(data);
+
+                        if (peliculasRecuperadas.length === storagePeliculas.length) {
+                            this.setState({
+                                peliculasFavoritas: peliculasRecuperadas,
+                                cargandoPeliculas: false
+                            });
+                        }
+                    })
+                    .catch(error => console.log(error));
+            }
+        }
+
+        let storageSeries = localStorage.getItem("favoritosSeries");
+        storageSeries = JSON.parse(storageSeries);
+
+        if (storageSeries === null) {
+            this.setState({
+                seriesFavoritas: [],
+                cargandoSeries: false
+            });
+
+        } else {
+            let seriesRecuperadas = [];
+
+            for (let i = 0; i < storageSeries.length; i++) {
+                fetch(`https://api.themoviedb.org/3/tv/${storageSeries[i]}?api_key=${apiKey}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        seriesRecuperadas.push(data);
+
+                        if (seriesRecuperadas.length === storageSeries.length) {
+                            this.setState({
+                                seriesFavoritas: seriesRecuperadas,
+                                cargandoSeries: false
+                            });
+                        }
+                    })
+                    .catch(error => console.log(error));
+            }
+        }
+    }
+
+    sesionExiste() {
+        return document.cookie !== "";
+    }
+
+    render() {
+        return (
+            <div className="container">
+                <h1>UdeSA Movies</h1>
+
+                <h2 className="alert alert-primary">Películas favoritas</h2>
+                {this.state.cargandoPeliculas ? (
+                    <h3>Cargando películas...</h3>
+                ) : this.state.peliculasFavoritas.length === 0 ? (
+                    <h3>No hay películas agregadas a favoritos</h3>
+                ) : (
+                    <section className="row cards" id="movies">
+                        {this.state.peliculasFavoritas.map((pelicula, idx) => (
+                            <Card
+                                key={idx}
+                                id={pelicula.id}
+                                clase="single-card-movie"
+                                img={`https://image.tmdb.org/t/p/w342/${pelicula.poster_path}`}
+                                titulo={pelicula.title}
+                                descripcion={pelicula.overview}
+                                storageKey="favoritosPeliculas"
+                            />
+                        ))}
+                    </section>
+                )}
+
+                <h2 className="alert alert-warning">Series favoritas</h2>
+                {this.state.cargandoSeries ? (
+                    <h3>Cargando series...</h3>
+                ) : this.state.seriesFavoritas.length === 0 ? (
+                    <h3>No hay series agregadas a favoritos</h3>
+                ) : (
+                    <section className="row cards" id="tv-show">
+                        {this.state.seriesFavoritas.map((serie, idx) => (
+                            <Card
+                                key={idx}
+                                id={serie.id}
+                                clase="single-card-tv"
+                                img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
+                                titulo={serie.name}
+                                descripcion={serie.overview}
+                                storageKey="favoritosSeries"
+                            />
+                        ))}
+                    </section>
+                )}
+            </div>
+        );
+    }
 }
 
 export default Favoritos;
+
+
+
+
+
+
+
+

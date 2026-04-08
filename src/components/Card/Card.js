@@ -8,11 +8,26 @@ class Card extends Component {
         super(props)
         this.state = {
             textoBoton: "Ver descripción",
-            clase: "hide"
+            clase: "hide",
+            textoFavorito: "Agregar a favoritos"
         }
     }
 
-    cambio() {
+    componentDidMount() {
+        let storage = localStorage.getItem(this.props.storageKey);
+        storage = JSON.parse(storage);
+
+        if (storage !== null) {
+            let esFavorito = storage.includes(this.props.id);
+
+            this.setState({
+                textoFavorito: esFavorito ? "Sacar de favoritos" : "Agregar a favoritos"
+            });
+        }
+    }
+
+
+    cambioDescrip() {
         if (this.state.textoBoton === "Ver descripción") {
             this.setState({
                 textoBoton: "Ocultar descripción",
@@ -25,9 +40,40 @@ class Card extends Component {
             })
         }
     }
-    
+
     sesionExiste() {
         return document.cookie !== "";
+    }
+
+    cambioFavorito() {
+        let id = this.props.id;
+        let storage = localStorage.getItem(this.props.storageKey);
+        if (this.state.textoFavorito === "Agregar a favoritos") {
+
+            if (storage === null) {
+                let arrayFavoritos = [id];
+                let storageString = JSON.stringify(arrayFavoritos)
+                localStorage.setItem(this.props.storageKey, storageString);
+            } else {
+                let arrayFavoritos = JSON.parse(storage);
+                arrayFavoritos.push(id);
+                let storageString = JSON.stringify(arrayFavoritos);
+                localStorage.setItem(this.props.storageKey, storageString);
+            }
+
+            this.setState({
+                textoFavorito: "Sacar de favoritos"
+            });
+
+        } else {
+            let storageParse = JSON.parse(storage);
+            let storageFiltrado = storageParse.filter((elemento) => elemento !== id);
+            let storageString = JSON.stringify(storageFiltrado);
+            localStorage.setItem("favoritos", storageString);
+            this.setState({
+                textoFavorito: "Agregar a favoritos"
+            });
+        }
     }
 
 
@@ -42,17 +88,23 @@ class Card extends Component {
                 <div className="cardBody">
                     <h5 className="card-title">{this.props.titulo}</h5>
 
-                    <p className={this.state.clase}>{this.props.descripcion}</p>
+                    <p className="card-text">{this.props.descripcion}</p>
 
-                    <button onClick={() => this.cambio()}>
+                    <button className="btn btn-primary"
+                        onClick={() => this.cambioDescrip()}>
                         {this.state.textoBoton}
                     </button>
 
-                    <Link to={`/detalle/${this.props.id}`}>
+                    <Link to={`/detalle/${this.props.id}`} className="btn btn-primary" >
                         <button>Ir a detalle</button>
                     </Link>
 
-                    {this.sesionExiste() ? <button>⭐</button> : null}
+                    {this.sesionExiste() ? (
+                        <button className="btn btn-primary" 
+                        onClick={() => this.cambioFavorito()}>
+                            {this.state.textoFavorito}
+                        </button>
+                    ) : null}
                 </div>
             </article>
         );
