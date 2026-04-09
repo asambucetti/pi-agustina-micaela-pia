@@ -13,43 +13,65 @@ class Detalle extends Component {
 
     componentDidMount() {
         let id = this.props.match.params.id;
-        let tipo = this.props.match.params.tipo; //pelicula o serie
+        let categoria = this.props.match.params.categoria; //pelicula o serie
 
         //fetch detalle
-        fetch(`https://api.themoviedb.org/3/${tipo}/${id}?api_key=${apiKey}`)
+        fetch(`https://api.themoviedb.org/3/${categoria}/${id}?api_key=${apiKey}`)
             .then(res => res.json())
             .then(data => {
                 this.setState({
                     detalle: data
                 });
-            });
+            })
+            .catch(error => console.log(error));
 
 
         //fetch generos
-        fetch(`https://api.themoviedb.org/3/genre/${tipo}/list`)
+        fetch(`https://api.themoviedb.org/3/genre/${categoria}/list?api_key=${apiKey}`)
             .then(res => res.json())
             .then(data => {
                 this.setState({
                     generos: data.genres
                 });
-            });
+            })
+            .catch(error => console.log(error));
     }
 
 
 
     render() {
 
-        let tipo = this.props.match.params.tipo;
+        let categoria = this.props.match.params.categoria;
         let sesionExiste = localStorage.getItem("usuario");
 
         if (this.state.detalle === null) {
             return <p>Cargando...</p>
         }
 
+
+
+        let generosAMostrar = [];
+
+        // Caso 1: detalle trae genre_ids
+        if (this.state.detalle.genre_ids) {
+            generosAMostrar = this.state.detalle.genre_ids
+                .map(idGenero =>
+                    this.state.generos.find(genero => genero.id === idGenero)
+                )
+                .filter(genero => genero !== undefined);
+        }
+
+        // Caso 2: detalle trae genres
+        else if (this.state.detalle.genres) {
+            generosAMostrar = this.state.detalle.genres;
+        }
+
+
+
         return (
             <article className="container">
 
-                {tipo === "movie" ? (
+                {categoria === "movie" ? (
                     <div>
                         <img
                             src={`https://image.tmdb.org/t/p/w342/${this.state.detalle.poster_path}`}
@@ -62,13 +84,13 @@ class Detalle extends Component {
                             <p>Rating: {this.state.detalle.vote_average}</p>
                             <p>Release date: {this.state.detalle.release_date}</p>
                             <p>{this.state.detalle.overview}</p>
-                            <p>Genre: {this.state.detalle.genre_ids.map((id, idx) =>
-                                this.state.generos /*ESTO QUE HAGO ACA ME DEVUELVE -- this.state.generos = [{ id: 28, name: "Action" },{ id: 12, name: "Adventure" },{ id: 35, name: "Comedy" }. ES LA LISTA DE GENEROS QUE CREAMOS AL PPIO Y QUE SE RELLENA CON FETCH*/
-                                    .filter(genero => genero.id === id)
-                                    .map((genero, i) => (
-                                        <span key={i}>{genero.name}</span> // UTILIZO ETIQUETA SPAN PQ es etiqueta de HTML que sirve para mostrar texto en línea (sin hacer salto de línea)
-                                    ))
-                            )}
+                            <p>
+                                Genre: {generosAMostrar.map((genero, i) => (
+                                    <span key={genero.id}>
+                                        {genero.name}
+                                        {i < generosAMostrar.length - 1 ? ", " : ""}
+                                    </span>
+                                ))}
                             </p>
 
 
@@ -88,13 +110,13 @@ class Detalle extends Component {
                             <p>Rating: {this.state.detalle.vote_average}</p>
                             <p>Release date: {this.state.detalle.first_air_date}</p>
                             <p>{this.state.detalle.overview}</p>
-                            <p>Genre: {this.state.detalle.genre_ids.map((id, idx) =>
-                                this.state.generos /*ESTO QUE HAGO ACA ME DEVUELVE -- this.state.generos = [{ id: 28, name: "Action" },{ id: 12, name: "Adventure" },{ id: 35, name: "Comedy" }. ES LA LISTA DE GENEROS QUE CREAMOS AL PPIO Y QUE SE RELLENA CON FETCH*/
-                                    .filter(genero => genero.id === id)
-                                    .map((genero, i) => (
-                                        <span key={i}>{genero.name}</span> // UTILIZO ETIQUETA SPAN PQ es etiqueta de HTML que sirve para mostrar texto en línea (sin hacer salto de línea)
-                                    ))
-                            )}
+                            <p>
+                                Genre: {generosAMostrar.map((genero, i) => (
+                                    <span key={genero.id}>
+                                        {genero.name}
+                                        {i < generosAMostrar.length - 1 ? ", " : ""}
+                                    </span>
+                                ))}
                             </p>
 
 
