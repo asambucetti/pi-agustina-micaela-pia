@@ -76,7 +76,7 @@ class Favoritos extends Component {
     }
 
     sesionExiste() {
-        return document.cookie !== "";
+        return document.cookie.includes("sesion-true");
     }
 
     render() {

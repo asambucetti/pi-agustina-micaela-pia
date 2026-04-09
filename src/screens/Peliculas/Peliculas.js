@@ -82,7 +82,7 @@ class Peliculas extends Component {
             <Card
               key={idx}
               id={pelicula.id}
-              categoria="pelicula"
+              categoria="movie"
               clase="single-card-movie"
               img={`https://image.tmdb.org/t/p/w342/${pelicula.poster_path}`}
               titulo={pelicula.title}

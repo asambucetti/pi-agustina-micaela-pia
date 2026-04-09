@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import "./Card.css"
+
 class Card extends Component {
     constructor(props) {
         super(props)
@@ -42,7 +43,7 @@ class Card extends Component {
     }
 
     sesionExiste() {
-        return document.cookie !== "";
+        return document.cookie.includes("sesion-true");
     }
 
     cambioFavorito() {
@@ -77,38 +78,40 @@ class Card extends Component {
     }
 
 
-    render() {
-        return (
-            <article className={this.props.clase}>
-                <img
-                    src={this.props.img}
-                    className="card-img-top"
-                    alt={this.props.titulo}
-                />
-                <div className="cardBody">
-                    <h5 className="card-title">{this.props.titulo}</h5>
 
-                    <p className={this.state.clase}>{this.props.descripcion}</p>
+        render() {
+            return (
+                <article className={this.props.clase}>
+                    <img
+                        src={this.props.img}
+                        className="card-img-top"
+                        alt={this.props.titulo}
+                    />
+                    <div className="cardBody">
+                        <h5 className="card-title">{this.props.titulo}</h5>
 
-                    <button className="btn btn-primary"
-                        onClick={() => this.cambioDescrip()}>
-                        {this.state.textoBoton}
-                    </button>
+                        <p className={this.state.clase}>{this.props.descripcion}</p>
 
-                    <Link to={`/detalle/${this.props.categoria}/${this.props.id}`} className="btn btn-primary" >
-                        <button>Ir a detalle</button>
-                    </Link>
-
-                    {this.sesionExiste() ? (
-                        <button className="btn btn-primary" 
-                        onClick={() => this.cambioFavorito()}>
-                            {this.state.textoFavorito}
+                        <button className="btn btn-primary"
+                            onClick={() => this.cambioDescrip()}>
+                            {this.state.textoBoton}
                         </button>
-                    ) : null}
-                </div>
-            </article>
-        );
+
+                        <Link to={`/detalle/${this.props.id}`} className="btn btn-primary" >
+                            Ir a detalle
+                        </Link>
+
+                        {this.sesionExiste() ? (
+                            <button className="btn btn-primary"
+                                onClick={() => this.cambioFavorito()}>
+                                {this.state.textoFavorito}
+                            </button>
+                        ) : null}
+                    </div>
+                </article>
+            );
+        }
     }
-}
+
 
 export default Card;

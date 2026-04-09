@@ -33,6 +33,7 @@ class Series extends Component {
                         titulo={serie.name}
                         descripcion={serie.overview}
                         img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
+                        storageKey="favoritosSeries"
                     />
                 ))}
             </section>

@@ -35,6 +35,7 @@ class Peliculas extends Component {
                         titulo={peli.title}
                         descripcion={peli.overview}
                         img={`https://image.tmdb.org/t/p/w342/${peli.poster_path}`}
+                        storageKey= "favoritosPeliculas"
                     />
                 ))}
             </section>
