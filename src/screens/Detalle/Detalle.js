@@ -64,7 +64,7 @@ class Detalle extends Component {
                             <p>{this.state.detalle.overview}</p>
                             <p>Genre: {this.state.detalle.genre_ids.map((id, idx) =>
                                 this.state.generos /*ESTO QUE HAGO ACA ME DEVUELVE -- this.state.generos = [{ id: 28, name: "Action" },{ id: 12, name: "Adventure" },{ id: 35, name: "Comedy" }. ES LA LISTA DE GENEROS QUE CREAMOS AL PPIO Y QUE SE RELLENA CON FETCH*/
-                                    .filter(genero => genero.id == id)
+                                    .filter(genero => genero.id === id)
                                     .map((genero, i) => (
                                         <span key={i}>{genero.name}</span> // UTILIZO ETIQUETA SPAN PQ es etiqueta de HTML que sirve para mostrar texto en línea (sin hacer salto de línea)
                                     ))
@@ -90,7 +90,7 @@ class Detalle extends Component {
                             <p>{this.state.detalle.overview}</p>
                             <p>Genre: {this.state.detalle.genre_ids.map((id, idx) =>
                                 this.state.generos /*ESTO QUE HAGO ACA ME DEVUELVE -- this.state.generos = [{ id: 28, name: "Action" },{ id: 12, name: "Adventure" },{ id: 35, name: "Comedy" }. ES LA LISTA DE GENEROS QUE CREAMOS AL PPIO Y QUE SE RELLENA CON FETCH*/
-                                    .filter(genero => genero.id == id)
+                                    .filter(genero => genero.id === id)
                                     .map((genero, i) => (
                                         <span key={i}>{genero.name}</span> // UTILIZO ETIQUETA SPAN PQ es etiqueta de HTML que sirve para mostrar texto en línea (sin hacer salto de línea)
                                     ))

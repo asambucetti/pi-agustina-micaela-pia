@@ -10,6 +10,7 @@ import SearchResults from './screens/SearchResults/SearchResults';
 import Favoritos from './screens/Favoritos/Favoritos';
 import Login from './screens/Login/Login';
 import Register from './screens/Register/Register';
+import Detalle from './screens/Detalle/Detalle';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/Peliculas" component={Peliculas} />
         <Route path="/Series" component={Series} />  
         <Route path="/SearchResults/:nombre" component={SearchResults} />
+        <Route path="/Detalle/:categoria/:id" component={Detalle}/>
         <Route path="" component={NotFound} />
       </Switch>
 

@@ -95,7 +95,7 @@ class Card extends Component {
                         {this.state.textoBoton}
                     </button>
 
-                    <Link to={`/detalle/${this.props.id}`} className="btn btn-primary" >
+                    <Link to={`/detalle/${this.props.categoria}/${this.props.id}`} className="btn btn-primary" >
                         <button>Ir a detalle</button>
                     </Link>
 
