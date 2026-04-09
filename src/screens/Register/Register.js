@@ -38,7 +38,11 @@ class Register extends Component {
 
         /* VALIDACIONES */
         let mailExistente = false
-        /*me falta como comprobar no se si hacer un for o que */
+        for (let i = 0; i < storage.length; i++){
+            if(storage[i].email===this.state.email){
+                mailExistente = true
+            }
+        }
 
         /*Cambio el estado de error */
         if (mailExistente) {
@@ -46,7 +50,7 @@ class Register extends Component {
         }
 
         /*Minimo 6 caracteres */
-        if (this.state.password.lenght < 6) {
+        if (this.state.password.length < 6) {
             this.setState({ error: "Mínimo 6 caracteres" });
         }
 
@@ -70,34 +74,38 @@ class Register extends Component {
 
     render() {
         return (
-            <div className="row justify-content-center">
-                <div className="col-md-6">
+            <div>
+                <h2 className="alert alert-primary">Registro</h2>
 
-                    <form onSubmit={(event) => this.evitarSubmit(event)}>
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                id="email"
-                                placeholder="Ingresá tu email"
-                                onChange={(event) => this.controlarCambios(event)} value={this.state.email} />
-                        </div>
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
 
-                        <div className="form-group">
-                            <label htmlFor="password">Contraseña</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="password"
-                                placeholder="Ingresá tu contraseña"
-                                onChange={(event) => this.controlarCambios(event)} value={this.state.password} />
-                        </div>
+                        <form onSubmit={(event) => this.evitarSubmit(event)}>
+                            <div className="form-group">
+                                <label htmlFor="email">Email</label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    id="email"
+                                    placeholder="Ingresá tu email"
+                                    onChange={(event) => this.controlarCambios(event)} value={this.state.email} />
+                            </div>
 
-                        <button type="submit" className="btn btn-primary btn-block">Register</button>
-                    </form>
-                    <p className="mt-3 text-center">¿Ya tenés cuenta? <a href="login.html">Iniciar sesión</a></p>
-                    {this.state.error !== "" ? <p>{this.state.error}</p> : null}
+                            <div className="form-group">
+                                <label htmlFor="password">Contraseña</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="password"
+                                    placeholder="Ingresá tu contraseña"
+                                    onChange={(event) => this.controlarCambios(event)} value={this.state.password} />
+                            </div>
+
+                            <button type="submit" className="btn btn-primary btn-block">Register</button>
+                        </form>
+                        <p className="mt-3 text-center">¿Ya tenés cuenta? <a href="login.html">Iniciar sesión</a></p>
+                        {this.state.error !== "" ? <p>{this.state.error}</p> : null}
+                    </div>
                 </div>
             </div>
         )
