@@ -19,7 +19,7 @@ class Register extends Component {
     }
 
 
-    evitarSumbit(event) {
+    evitarSubmit(event) {
         event.preventDefault();
 
         /*primero debo traer lo que este guardado en el local storage a traves del metodo get,
