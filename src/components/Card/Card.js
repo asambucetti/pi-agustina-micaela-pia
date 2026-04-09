@@ -79,39 +79,39 @@ class Card extends Component {
 
 
 
-        render() {
-            return (
-                <article className={this.props.clase}>
-                    <img
-                        src={this.props.img}
-                        className="card-img-top"
-                        alt={this.props.titulo}
-                    />
-                    <div className="cardBody">
-                        <h5 className="card-title">{this.props.titulo}</h5>
+    render() {
+        return (
+            <article className={this.props.clase}>
+                <img
+                    src={this.props.img}
+                    className="card-img-top"
+                    alt={this.props.titulo}
+                />
+                <div className="cardBody">
+                    <h5 className="card-title">{this.props.titulo}</h5>
 
-                        <p className={this.state.clase}>{this.props.descripcion}</p>
+                    <p className={this.state.clase}>{this.props.descripcion}</p>
 
+                    <button className="btn btn-primary"
+                        onClick={() => this.cambioDescrip()}>
+                        {this.state.textoBoton}
+                    </button>
+
+                    <Link to={`/detalle/${this.props.categoria}/${this.props.id}`} className="btn btn-primary">
+                        Ir a detalle
+                    </Link>
+
+                    {this.sesionExiste() ? (
                         <button className="btn btn-primary"
-                            onClick={() => this.cambioDescrip()}>
-                            {this.state.textoBoton}
+                            onClick={() => this.cambioFavorito()}>
+                            {this.state.textoFavorito}
                         </button>
-
-                        <Link to={`/detalle/${this.props.id}`} className="btn btn-primary" >
-                            Ir a detalle
-                        </Link>
-
-                        {this.sesionExiste() ? (
-                            <button className="btn btn-primary"
-                                onClick={() => this.cambioFavorito()}>
-                                {this.state.textoFavorito}
-                            </button>
-                        ) : null}
-                    </div>
-                </article>
-            );
-        }
+                    ) : null}
+                </div>
+            </article>
+        );
     }
+}
 
 
 export default Card;

@@ -40,7 +40,6 @@ class Detalle extends Component {
 
 
     render() {
-
         let categoria = this.props.match.params.categoria;
         let sesionExiste = localStorage.getItem("usuario");
 
@@ -54,11 +53,9 @@ class Detalle extends Component {
 
         // Caso 1: detalle trae genre_ids
         if (this.state.detalle.genre_ids) {
-            generosAMostrar = this.state.detalle.genre_ids
-                .map(idGenero =>
-                    this.state.generos.find(genero => genero.id === idGenero)
-                )
-                .filter(genero => genero !== undefined);
+            generosAMostrar = this.state.generos.filter(genero => // Con filter, me quedo solamente con los géneros cuyo id esté incluido dentro de genre_ids
+                this.state.detalle.genre_ids.includes(genero.id)
+            );
         }
 
         // Caso 2: detalle trae genres
@@ -88,7 +85,6 @@ class Detalle extends Component {
                                 Genre: {generosAMostrar.map((genero, i) => (
                                     <span key={genero.id}>
                                         {genero.name}
-                                        {i < generosAMostrar.length - 1 ? ", " : ""}
                                     </span>
                                 ))}
                             </p>
@@ -114,7 +110,6 @@ class Detalle extends Component {
                                 Genre: {generosAMostrar.map((genero, i) => (
                                     <span key={genero.id}>
                                         {genero.name}
-                                        {i < generosAMostrar.length - 1 ? ", " : ""}
                                     </span>
                                 ))}
                             </p>

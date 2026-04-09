@@ -32,6 +32,7 @@ class Peliculas extends Component {
                     <Card
                         key={idx}
                         id={peli.id}
+                        categoria="movie"
                         titulo={peli.title}
                         descripcion={peli.overview}
                         img={`https://image.tmdb.org/t/p/w342/${peli.poster_path}`}

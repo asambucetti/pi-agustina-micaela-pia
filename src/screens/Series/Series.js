@@ -74,7 +74,7 @@ class Series extends Component {
             <Card
               key={idx}
               id={serie.id}
-              categoria="serie"
+              categoria="tv"
               clase="single-card-tv"
               img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
               titulo={serie.name}

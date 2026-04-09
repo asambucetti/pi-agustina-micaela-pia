@@ -95,6 +95,7 @@ class Favoritos extends Component {
                             <Card
                                 key={idx}
                                 id={pelicula.id}
+                                categoria="movie"
                                 clase="single-card-movie"
                                 img={`https://image.tmdb.org/t/p/w342/${pelicula.poster_path}`}
                                 titulo={pelicula.title}
@@ -116,6 +117,7 @@ class Favoritos extends Component {
                             <Card
                                 key={idx}
                                 id={serie.id}
+                                categoria="tv"
                                 clase="single-card-tv"
                                 img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
                                 titulo={serie.name}

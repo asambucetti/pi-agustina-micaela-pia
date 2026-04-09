@@ -59,6 +59,7 @@ class SearchResults extends Component {
                             {this.state.peliculas.length === 0 ? <h3>No hay resultados</h3> : this.state.peliculas.map((pelicula, idx) => <Card
                                 key={idx}
                                 id={pelicula.id}
+                                categoria="movie"
                                 clase="single-card-movie"
                                 img={`https://image.tmdb.org/t/p/w342/${pelicula.poster_path}`}
                                 titulo={pelicula.title}
@@ -71,6 +72,7 @@ class SearchResults extends Component {
                             {this.state.series.length === 0 ? <h3>No hay resultados</h3> : this.state.series.map((serie, idx) => <Card
                                 key={idx}
                                 id={serie.id}
+                                categoria="tv"
                                 clase="single-card-tv"
                                 img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
                                 titulo={serie.name}
