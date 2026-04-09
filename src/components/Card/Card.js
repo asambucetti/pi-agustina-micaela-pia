@@ -69,7 +69,7 @@ class Card extends Component {
             let storageParse = JSON.parse(storage);
             let storageFiltrado = storageParse.filter((elemento) => elemento !== id);
             let storageString = JSON.stringify(storageFiltrado);
-            localStorage.setItem("favoritos", storageString);
+            localStorage.setItem(this.props.storageKey, storageString);
             this.setState({
                 textoFavorito: "Agregar a favoritos"
             });

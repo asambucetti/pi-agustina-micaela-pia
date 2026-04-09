@@ -32,7 +32,7 @@ class Series extends Component {
                         id={serie.id}
                         titulo={serie.name}
                         descripcion={serie.overview}
-                        imagen={serie.poster_path}
+                        img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
                     />
                 ))}
             </section>

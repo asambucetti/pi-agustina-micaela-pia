@@ -34,7 +34,7 @@ class Peliculas extends Component {
                         id={peli.id}
                         titulo={peli.title}
                         descripcion={peli.overview}
-                        imagen={peli.poster_path}
+                        img={`https://image.tmdb.org/t/p/w342/${peli.poster_path}`}
                     />
                 ))}
             </section>
