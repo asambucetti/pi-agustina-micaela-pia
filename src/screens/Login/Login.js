@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Link from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class Login extends Component {
     constructor(props) {
@@ -33,7 +33,7 @@ class Login extends Component {
 
         let usuarioExistente = false;
 
-        for (let i = 0; i < array.length; i++) {
+        for (let i = 0; i < storage.length; i++) {
             if (
                 storage[i].email === this.state.email &&
                 storage[i].password === this.state.password
