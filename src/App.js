@@ -3,14 +3,14 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './screens/Home/Home';
 import { Switch, Route } from 'react-router-dom';
-import Peliculas from './components/Peliculas/Peliculas';
-import Series from './components/Series/Series';
+import Series from './screens/Series/Series';
 import NotFound from './screens/NotFound/NotFound';
 import SearchResults from './screens/SearchResults/SearchResults';
 import Favoritos from './screens/Favoritos/Favoritos';
 import Login from './screens/Login/Login';
 import Register from './screens/Register/Register';
 import Detalle from './screens/Detalle/Detalle';
+import Peliculas from './screens/Peliculas/Peliculas';
 
 
 function App() {
