@@ -92,7 +92,7 @@ class Card extends Component {
 
                     <p className={this.state.clase}>{this.props.descripcion}</p>
 
-                    <button className="btn btn-primary"
+                    <button className="btn btn-primary "
                         onClick={() => this.cambioDescrip()}>
                         {this.state.textoBoton}
                     </button>

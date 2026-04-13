@@ -27,19 +27,22 @@ class Peliculas extends Component {
 
     render() {
         return (
-            <section className="row">
-                {this.state.peliculas.map((peli, idx) => (
-                    <Card
-                        key={idx}
-                        id={peli.id}
-                        categoria="movie"
-                        titulo={peli.title}
-                        descripcion={peli.overview}
-                        img={`https://image.tmdb.org/t/p/w342/${peli.poster_path}`}
-                        storageKey= "favoritosPeliculas"
-                    />
-                ))}
-            </section>
+            <div className="container">
+                <section className="row cards">
+                    {this.state.peliculas.map((peli, idx) => (
+                        <Card
+                            key={idx}
+                            id={peli.id}
+                            clase="single-card-movie"
+                            categoria="movie"
+                            titulo={peli.title}
+                            descripcion={peli.overview}
+                            img={`https://image.tmdb.org/t/p/w342/${peli.poster_path}`}
+                            storageKey="favoritosPeliculas"
+                        />
+                    ))}
+                </section>
+            </div>
         );
     }
 }

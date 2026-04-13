@@ -25,11 +25,12 @@ class Series extends Component {
 
     render() {
         return (
-            <section className="row">
+            <section className="row cards">
                 {this.state.series.map((serie, idx) => (
                     <Card
                         key={idx}
                         id={serie.id}
+                        clase="single-card-tv"
                         categoria="tv"
                         titulo={serie.name}
                         descripcion={serie.overview}
