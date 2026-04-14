@@ -13,7 +13,7 @@ function Home() {
             <Peliculas />
 
             <Link to="/peliculas">
-                <button>Ver todas</button>
+                <button className="btn btn-primary btn-fav">Ver todas</button>
             </Link>
 
 
@@ -21,7 +21,7 @@ function Home() {
             <Series />
 
             <Link to="/series">
-                <button>Ver todas</button>
+                <button className="btn btn-primary btn-fav">Ver todas</button>
             </Link>
 
         </div>

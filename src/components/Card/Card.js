@@ -92,17 +92,17 @@ class Card extends Component {
 
                     <p className={this.state.clase}>{this.props.descripcion}</p>
 
-                    <button className="btn btn-primary "
+                    <button className="btn btn-primary btn-card"
                         onClick={() => this.cambioDescrip()}>
                         {this.state.textoBoton}
                     </button>
 
-                    <Link to={`/detalle/${this.props.categoria}/${this.props.id}`} className="btn btn-primary">
+                    <Link to={`/detalle/${this.props.categoria}/${this.props.id}`} className="btn btn-primary btn-card">
                         Ir a detalle
                     </Link>
 
                     {this.sesionExiste() ? (
-                        <button className="btn btn-primary"
+                        <button className="btn btn-primary btn-fav"
                             onClick={() => this.cambioFavorito()}>
                             {this.state.textoFavorito}
                         </button>

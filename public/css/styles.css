@@ -59,6 +59,7 @@ nav img{
 }
 .cardBody {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 .single-card-people {
     width: 19%;
@@ -74,7 +75,7 @@ nav img{
     overflow: hidden;
 }
 .single-card-tv {
-    width: 19%;
+    width: 24%;
 }
 .tv-show .card-text{
     height: 100px;
@@ -88,12 +89,22 @@ nav img{
     overflow: hidden;
 }
 
-.all-movies .single-card-movie {
-    width: 15%;
-}
 
 @media(min-width: 765px){
     nav {
         grid-template-columns: 1fr;
     }
+}
+
+.btn-card {
+    width: 48%;
+    margin: 5px 2px;
+    font-size: 13px;
+}
+    
+
+
+.btn-fav {
+    width: 100%;
+    font-size: 13px;
 }

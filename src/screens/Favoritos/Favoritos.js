@@ -93,7 +93,7 @@ class Favoritos extends Component {
                     <section className="row cards" id="movies">
                         {this.state.peliculasFavoritas.map((pelicula, idx) => (
                             <Card
-                                key={idx}
+                                key={idx}   
                                 id={pelicula.id}
                                 categoria="movie"
                                 clase="single-card-movie"
