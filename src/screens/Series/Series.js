@@ -10,7 +10,8 @@ class Series extends Component {
     this.state = {
       series: [],
       pagina: 1,
-      busqueda: ''
+      busqueda: '',
+      cargandoSeries: true
     };
   }
 
@@ -20,7 +21,8 @@ class Series extends Component {
       .then(response => response.json())
       .then(data =>
         this.setState({
-          series: data.results
+          series: data.results,
+          cargandoSeries: false
         })
       )
       .catch(error => console.log(error));
@@ -34,7 +36,8 @@ class Series extends Component {
       .then(data =>
         this.setState({
           series: this.state.series.concat(data.results),
-          pagina: paginaSiguiente
+          pagina: paginaSiguiente,
+          cargandoSeries: false
         })
       )
       .catch(error => console.log(error));
@@ -45,7 +48,7 @@ class Series extends Component {
   }
 
   controlarCambios(event) {
-    this.setState({busqueda: event.target.value});
+    this.setState({ busqueda: event.target.value });
   }
 
   filtrarSeries(textoAFiltrar) {
@@ -54,36 +57,43 @@ class Series extends Component {
   }
 
   render() {
-      let seriesFiltradas = this.filtrarSeries(this.state.busqueda);
+    let seriesFiltradas = this.filtrarSeries(this.state.busqueda);
     return (
 
       <div className="container">
         <h2 className="alert alert-warning">Todas las series</h2>
-  
-        <Filtro
-          controlarCambios={(event) => this.controlarCambios(event)}
-          evitarSubmit={(event) => this.evitarSubmit(event)}
-          valor={this.state.busqueda}
-        />
-        <button className="btn btn-warning" onClick={() => this.cargarMas()}>
-          Cargar más
-        </button>
-
-        <section className="row cards all-series" id="series">
-          {seriesFiltradas.map((serie, idx) => (
-            <Card
-              key={idx}
-              id={serie.id}
-              categoria="tv"
-              clase="single-card-tv"
-              img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
-              titulo={serie.name}
-              descripcion={serie.overview}
-              storageKey="favoritosSeries"
-
+        {this.state.cargandoSeries ? (
+          <h3>Cargando Series...</h3>
+        ) : this.state.series.length === 0 ? (
+          <h3>No hay Series</h3>
+        ) : (
+          <div>
+            <Filtro
+              controlarCambios={(event) => this.controlarCambios(event)}
+              evitarSubmit={(event) => this.evitarSubmit(event)}
+              valor={this.state.busqueda}
             />
-          ))}
-        </section>
+            <button className="btn btn-warning" onClick={() => this.cargarMas()}>
+              Cargar más
+            </button>
+
+            <section className="row cards all-series" id="series">
+              {seriesFiltradas.map((serie, idx) => (
+                <Card
+                  key={idx}
+                  id={serie.id}
+                  categoria="tv"
+                  clase="single-card-tv"
+                  img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
+                  titulo={serie.name}
+                  descripcion={serie.overview}
+                  storageKey="favoritosSeries"
+
+                />
+              ))}
+            </section>
+          </div>
+        )}
       </div>
     );
   }

@@ -8,7 +8,8 @@ class Series extends Component {
     constructor() {
         super();
         this.state = {
-            series: []
+            series: [],
+            cargandoSeries: true
         };
     }
 
@@ -17,7 +18,8 @@ class Series extends Component {
             .then(res => res.json())
             .then(data => {
                 this.setState({
-                    series: data.results
+                    series: data.results,
+                    cargandoSeries: false
                 });
             })
             .catch(error => console.log(error));
@@ -25,6 +27,12 @@ class Series extends Component {
 
     render() {
         return (
+            <div>
+            {this.state.cargandoSeries ? (
+                    <h3>Cargando Series...</h3>
+                ) : this.state.series.length === 0 ? (
+                    <h3>No hay Series</h3>
+                ) : (
             <section className="row cards">
                 {this.state.series.map((serie, idx) => (
                     <Card
@@ -39,6 +47,8 @@ class Series extends Component {
                     />
                 ))}
             </section>
+                )}
+            </div>
         );
     }
 }
