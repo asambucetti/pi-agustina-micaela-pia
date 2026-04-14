@@ -19,7 +19,7 @@ class Favoritos extends Component {
         let storagePeliculas = localStorage.getItem("favoritosPeliculas");
         storagePeliculas = JSON.parse(storagePeliculas);
 
-        if (storagePeliculas === null ) {
+        if (storagePeliculas.length === 0 ) {
             this.setState({
                 peliculasFavoritas: [],
                 cargandoPeliculas: false
@@ -48,7 +48,7 @@ class Favoritos extends Component {
         let storageSeries = localStorage.getItem("favoritosSeries");
         storageSeries = JSON.parse(storageSeries);
 
-        if (storageSeries === null) {
+        if (storageSeries.length === 0) {
             this.setState({
                 seriesFavoritas: [],
                 cargandoSeries: false
@@ -82,8 +82,6 @@ class Favoritos extends Component {
     render() {
         return (
             <div className="container">
-                <h1>UdeSA Movies</h1>
-
                 <h2 className="alert alert-primary">Películas favoritas</h2>
                 {this.state.cargandoPeliculas ? (
                     <h3>Cargando películas...</h3>
