@@ -9,7 +9,6 @@ function Header() {
   return (
     <div className="container">
       <nav>
-        <img src="/img/logo.png" alt="logo" />
         <ul className="nav nav-tabs my-4">
           <li className="nav-item">
             <Link className="nav-link" to="/">Home</Link>

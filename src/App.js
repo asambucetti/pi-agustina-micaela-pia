@@ -18,15 +18,16 @@ function App() {
   return (
     <div className="container">
 
-      <nav>
-        <ul className="main-nav">
-          <Header />
-        </ul>
-      </nav>
+
+      <div className="logo">
+        <img src="/img/logo.png" alt="logo" />
+      </div>
+      <Header />
 
 
-      
-    
+
+
+
 
       <Switch>
         <Route path="/" exact={true} component={Home} />
@@ -34,9 +35,9 @@ function App() {
         <Route path="/Register" component={Register} />
         <Route path="/Favorites" component={Favoritos} />
         <Route path="/Peliculas" component={Peliculas} />
-        <Route path="/Series" component={Series} />  
+        <Route path="/Series" component={Series} />
         <Route path="/SearchResults/:nombre" component={SearchResults} />
-        <Route path="/Detalle/:categoria/:id" component={Detalle}/>
+        <Route path="/Detalle/:categoria/:id" component={Detalle} />
         <Route path="" component={NotFound} />
       </Switch>
 
