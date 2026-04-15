@@ -43,7 +43,14 @@ class Card extends Component {
     }
 
     sesionExiste() {
-        return document.cookie.includes("sesion-true");
+        let sesion = sessionStorage.getItem("usuarioEnSesion");
+
+        if (sesion === null) {
+            return false;
+        }
+
+        let sesionParseada = JSON.parse(sesion);
+        return sesionParseada.sesionActiva === true;
     }
 
     cambioFavorito() {

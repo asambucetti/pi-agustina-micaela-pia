@@ -11,6 +11,7 @@ import Login from './screens/Login/Login';
 import Register from './screens/Register/Register';
 import Detalle from './screens/Detalle/Detalle';
 import Peliculas from './screens/Peliculas/Peliculas';
+import MiPerfil from './screens/MiPerfil/MiPerfil';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/Series" component={Series} />
         <Route path="/SearchResults/:nombre" component={SearchResults} />
         <Route path="/Detalle/:categoria/:id" component={Detalle} />
+        <Route path="/MiPerfil" component={MiPerfil} />
         <Route path="" component={NotFound} />
       </Switch>
 
