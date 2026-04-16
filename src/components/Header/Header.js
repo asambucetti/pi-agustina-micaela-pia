@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 
 function Header() {
   function sesionExistente() {
-    return document.cookie !== "";
+    let sesion = sessionStorage.getItem("usuarioEnSesion");
+
+    if (sesion === null){
+      return false;
+    }
+
+    let sesionParseada = JSON.parse(sesion)
+    return sesionParseada.sesionActiva === true;
   }
 
   return (
