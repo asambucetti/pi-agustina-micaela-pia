@@ -1,11 +1,10 @@
-
 .logo {
-  padding: 20px;
+    padding: 20px;
 }
 
 .logo img {
-  width: 70px;
-  height: auto;
+    width: 70px;
+    height: auto;
 }
 
 nav {
@@ -22,27 +21,34 @@ nav {
 .nav {
     margin: 0 !important;
 }
-.nav a{
+
+.nav a {
     color: #444;
     text-decoration: none;
 }
-.nav a:hover{
+
+.nav a:hover {
     font-weight: bold;
 }
-.search-form, .filter-form {
+
+.search-form,
+.filter-form {
     padding: .5rem 0;
     margin-bottom: 20px;
     display: grid;
     grid-template-columns: 5fr 1fr;
     column-gap: 5px;
 }
+
 .filter-form {
     grid-template-columns: 1fr;
 }
-.search-form .btn-sm{
+
+.search-form .btn-sm {
     line-height: 1;
     font-size: 0.9rem;
 }
+
 .search-form input,
 .filter-form input {
     border: 1px solid #ccc;
@@ -53,9 +59,11 @@ nav {
     font-size: 1rem;
     padding-bottom: 4px;
 }
+
 .filter-form input {
     line-height: 1.5;
 }
+
 .cards {
     padding: 0.75rem 1.25rem;
     display: flex;
@@ -64,40 +72,49 @@ nav {
     justify-content: space-between;
     margin-bottom: 2%;
 }
+
 .cardBody {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
 .single-card-people {
     width: 19%;
 }
+
 .single-card-movie {
     width: 24%;
 }
+
 .single-card-playing {
     width: 15%;
 }
-#now-playing .card-text{
+
+#now-playing .card-text {
     height: 100px;
     overflow: hidden;
 }
+
 .single-card-tv {
     width: 24%;
 }
-.tv-show .card-text{
+
+.tv-show .card-text {
     height: 100px;
     overflow: hidden;
 }
-.single-card-on-air{
+
+.single-card-on-air {
     width: 15%;
 }
-#on-air-today .card-text{
+
+#on-air-today .card-text {
     height: 100px;
     overflow: hidden;
 }
 
 
-@media(min-width: 765px){
+@media(min-width: 765px) {
     nav {
         grid-template-columns: 1fr;
     }
@@ -108,9 +125,20 @@ nav {
     margin: 5px 2px;
     font-size: 13px;
 }
-    
+
 .btn-fav {
     width: 100%;
     font-size: 13px;
     margin-bottom: 15px;
+}
+
+@media (max-width: 420px) {
+    .single-card-movie {
+        width: 100%;
+    }
+
+    .single-card-tv {
+        width: 100%;
+    }
+
 }
