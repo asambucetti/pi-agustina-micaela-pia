@@ -7,11 +7,11 @@ import Series from './screens/Series/Series';
 import NotFound from './screens/NotFound/NotFound';
 import SearchResults from './screens/SearchResults/SearchResults';
 import Favoritos from './screens/Favoritos/Favoritos';
-import Login from './screens/Login/Login';
 import Register from './screens/Register/Register';
 import Detalle from './screens/Detalle/Detalle';
 import Peliculas from './screens/Peliculas/Peliculas';
 import MiPerfil from './screens/MiPerfil/MiPerfil';
+import Login from './screens/Login/Login';
 
 
 function App() {
@@ -26,13 +26,9 @@ function App() {
       <Header />
 
 
-
-
-
-
       <Switch>
         <Route path="/" exact={true} component={Home} />
-        <Route path="/Login" component={Login} />
+        <Route path="/Login" component={Login} /> 
         <Route path="/Register" component={Register} />
         <Route path="/Favorites" component={Favoritos} />
         <Route path="/Peliculas" component={Peliculas} />

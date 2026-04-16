@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies()
 
 class MiPerfil extends Component {
     constructor(props) {
@@ -15,7 +17,13 @@ class MiPerfil extends Component {
 
     render() {
         return (
-            <button type="submit" className="btn btn-primary btn-block">Logout</button>
+            <button
+                type="submit"
+                className="btn btn-primary btn-block"
+                onClick={(event) => this.logout(event)}
+            >
+                Logout
+            </button>
         );
     }
 }
