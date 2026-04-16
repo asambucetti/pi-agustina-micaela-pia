@@ -1,7 +1,7 @@
 import React from 'react';
 import FormLogin from "../../components/FormLogin/FormLogin";
 
-function Login(props) {
+function Login() {
     return (
         <div>
             <h2 className="alert alert-primary">Login</h2>
@@ -9,7 +9,7 @@ function Login(props) {
             <div className="row justify-content-center">
                 <div className="col-md-6">
 
-                    <FormLogin history={props.history}/>
+                    <FormLogin/>
 
                 </div>
             </div>
