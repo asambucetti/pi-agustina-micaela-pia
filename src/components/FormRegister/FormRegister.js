@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 class FormRegister extends Component {
@@ -47,7 +48,7 @@ class FormRegister extends Component {
             this.setState({errorEmail: ""})
         }
         
-        if (this.state.password.length < 5 || this.state.username.length > 12){
+        if (this.state.password.length < 5 || this.state.password.length > 12){
             this.setState({errorPassword: "La extensión del password debe ser de 5 a 12 caracteres"})
             return;
         }else{
@@ -141,4 +142,4 @@ class FormRegister extends Component {
 
 }
 
-export default FormRegister;
+export default withRouter(FormRegister);
