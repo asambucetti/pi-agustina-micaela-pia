@@ -1,8 +1,10 @@
 
 import React, { Component } from 'react';
+import Cookies from 'universal-cookie'
 import Card from '../../components/Card/Card';
 
 const apiKey = "5c6cfdfae06798b19907f4b6448f6847";
+const cookies = new Cookies()
 
 class Favoritos extends Component {
     constructor(props) {
@@ -19,7 +21,7 @@ class Favoritos extends Component {
         let storagePeliculas = localStorage.getItem("favoritosPeliculas");
         storagePeliculas = JSON.parse(storagePeliculas);
 
-        if (storagePeliculas.length === 0 ) {
+        if (storagePeliculas === null || storagePeliculas.length === 0 ) {
             this.setState({
                 peliculasFavoritas: [],
                 cargandoPeliculas: false
@@ -48,7 +50,7 @@ class Favoritos extends Component {
         let storageSeries = localStorage.getItem("favoritosSeries");
         storageSeries = JSON.parse(storageSeries);
 
-        if (storageSeries.length === 0) {
+        if (storageSeries === null || storageSeries.length === 0 ) {
             this.setState({
                 seriesFavoritas: [],
                 cargandoSeries: false
@@ -75,57 +77,57 @@ class Favoritos extends Component {
         }
     }
 
-    sesionExiste() {
-        return document.cookie.includes("sesion-true");
-    }
 
     render() {
-        return (
-            <div className="container">
-                <h2 className="alert alert-primary">Películas favoritas</h2>
-                {this.state.cargandoPeliculas ? (
-                    <h3>Cargando películas...</h3>
-                ) : this.state.peliculasFavoritas.length === 0 ? (
-                    <h3>No hay películas agregadas a favoritos</h3>
-                ) : (
-                    <section className="row cards" id="movies">
-                        {this.state.peliculasFavoritas.map((pelicula, idx) => (
-                            <Card
-                                key={idx}   
-                                id={pelicula.id}
-                                categoria="movie"
-                                clase="single-card-movie"
-                                img={`https://image.tmdb.org/t/p/w342/${pelicula.poster_path}`}
-                                titulo={pelicula.title}
-                                descripcion={pelicula.overview}
-                                storageKey="favoritosPeliculas"
-                            />
-                        ))}
-                    </section>
-                )}
+        let usuario = cookies.get('auth-user');
+        if (usuario === undefined) {
+            return <h3>Debés iniciar sesión para ver favoritos</h3>;
+        } 
+        return (<div className="container">
+            <h2 className="alert alert-primary">Películas favoritas</h2>
+            {this.state.cargandoPeliculas ? (
+                <h3>Cargando películas...</h3>
+            ) : this.state.peliculasFavoritas.length === 0 ? (
+                <h3>No hay películas agregadas a favoritos</h3>
+            ) : (
+                <section className="row cards" id="movies">
+                    {this.state.peliculasFavoritas.map((pelicula, idx) => (
+                        <Card
+                            key={idx}
+                            id={pelicula.id}
+                            categoria="movie"
+                            clase="single-card-movie"
+                            img={`https://image.tmdb.org/t/p/w342/${pelicula.poster_path}`}
+                            titulo={pelicula.title}
+                            descripcion={pelicula.overview}
+                            storageKey="favoritosPeliculas"
+                        />
+                    ))}
+                </section>
+            )}
 
-                <h2 className="alert alert-warning">Series favoritas</h2>
-                {this.state.cargandoSeries ? (
-                    <h3>Cargando series...</h3>
-                ) : this.state.seriesFavoritas.length === 0 ? (
-                    <h3>No hay series agregadas a favoritos</h3>
-                ) : (
-                    <section className="row cards" id="tv-show">
-                        {this.state.seriesFavoritas.map((serie, idx) => (
-                            <Card
-                                key={idx}
-                                id={serie.id}
-                                categoria="tv"
-                                clase="single-card-tv"
-                                img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
-                                titulo={serie.name}
-                                descripcion={serie.overview}
-                                storageKey="favoritosSeries"
-                            />
-                        ))}
-                    </section>
-                )}
-            </div>
+            <h2 className="alert alert-warning">Series favoritas</h2>
+            {this.state.cargandoSeries ? (
+                <h3>Cargando series...</h3>
+            ) : this.state.seriesFavoritas.length === 0 ? (
+                <h3>No hay series agregadas a favoritos</h3>
+            ) : (
+                <section className="row cards" id="tv-show">
+                    {this.state.seriesFavoritas.map((serie, idx) => (
+                        <Card
+                            key={idx}
+                            id={serie.id}
+                            categoria="tv"
+                            clase="single-card-tv"
+                            img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
+                            titulo={serie.name}
+                            descripcion={serie.overview}
+                            storageKey="favoritosSeries"
+                        />
+                    ))}
+                </section>
+            )}
+        </div>
         );
     }
 }

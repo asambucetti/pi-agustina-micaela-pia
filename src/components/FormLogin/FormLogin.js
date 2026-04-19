@@ -43,8 +43,6 @@ class FormLogin extends Component {
                 if (usuario.password !== this.state.password) {
                     this.setState({ error: "Las credenciales ingresadas son inválidas" });
                 } else {
-                    sessionStorage.setItem("usuarioEnSesion", JSON.stringify({ sesionActiva: true }));
-
                     //cookie
                     cookies.set('auth-user', this.state.email);
 

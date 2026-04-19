@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import "./Card.css"
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 class Card extends Component {
     constructor(props) {
@@ -41,16 +43,14 @@ class Card extends Component {
     }
 
     sesionExiste() {
-        let sesion = sessionStorage.getItem("usuarioEnSesion");
+        let usuario = cookies.get('auth-user');
 
-        if (sesion === null) {
+        if (usuario === undefined) {
             return false;
+        } else {
+            return true;
         }
-
-        let sesionParseada = JSON.parse(sesion);
-        return sesionParseada.sesionActiva === true;
     }
-
     cambioFavorito() {
         let id = this.props.id;
         let storage = localStorage.getItem(this.props.storageKey);

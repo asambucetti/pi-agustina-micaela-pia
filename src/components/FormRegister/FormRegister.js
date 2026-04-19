@@ -58,7 +58,7 @@ class FormRegister extends Component {
         /*primero debo traer lo que este guardado en el local storage a traves del metodo get,
         luego hago las validaciones necesarias y una vez que este todo correcto, recien ahi se crea
         la cuenta del usuario y se guarda en el localStorage la nueva cuenta creada */
-        let usersStorage = localStorage.getItem('users');
+        let usersStorage = localStorage.getItem("users");
 
         /*si existen usuarios guardados transformo el string en un array usable. 
         si es que no hay datos (else) creo un array para guardar los nuevos datos */
