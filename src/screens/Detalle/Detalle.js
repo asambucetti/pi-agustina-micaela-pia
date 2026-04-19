@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const apiKey = "5c6cfdfae06798b19907f4b6448f6847";
 
@@ -38,10 +42,39 @@ class Detalle extends Component {
     }
 
 
+    agregarAFavoritos = () => {
+        let id = this.state.detalle.id;
+        let categoria = this.props.match.params.categoria;
+
+        // elijo clave segun categoria
+        let storageKey = categoria === "movie" ? "favoritosPeliculas" : "favoritosSeries";
+
+        let favoritos = JSON.parse(localStorage.getItem(storageKey));
+
+        if (favoritos === null) {
+            favoritos = [];
+        }
+
+        if (favoritos.includes(id) === false) {
+            favoritos.push(id);
+        }
+
+        localStorage.setItem(storageKey, JSON.stringify(favoritos))
+
+        // esta alerta esta de mas pero sirve
+        alert("Agregado a favoritos");
+    }
+
+
+
+
 
     render() {
         let categoria = this.props.match.params.categoria;
-        let sesionExiste = localStorage.getItem("usuario");
+        let sesionExiste = cookies.get('auth-user');
+
+        console.log(cookies.get('auth-user'));
+
 
         if (this.state.detalle === null) {
             return <p>Cargando...</p>
@@ -90,7 +123,7 @@ class Detalle extends Component {
                             </p>
 
 
-                            {sesionExiste ? <button>⭐</button> : null}
+                            {sesionExiste ? <button onClick={this.agregarAFavoritos}>⭐</button> : null}
                         </div>
                     </div>
 
@@ -115,7 +148,7 @@ class Detalle extends Component {
                             </p>
 
 
-                            {sesionExiste ? <button>⭐</button> : null}
+                            {sesionExiste ? <button onClick={this.agregarAFavoritos}>⭐</button> : null}
                         </div>
                     </div>
 

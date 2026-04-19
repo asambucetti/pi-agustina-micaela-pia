@@ -1,17 +1,21 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import MiPerfil from '../../screens/MiPerfil/MiPerfil';
+import Cookies from 'universal-cookie';
 
-function Header() {
+const cookies = new Cookies();
+
+
+function Header(props) {
   function sesionExistente() {
-    let sesion = sessionStorage.getItem("usuarioEnSesion");
+    let usuario = cookies.get('auth-user');
 
-    if (sesion === null){
+    if (usuario === undefined) {
       return false;
+    } else {
+      return true;
     }
-
-    let sesionParseada = JSON.parse(sesion)
-    return sesionParseada.sesionActiva === true;
   }
 
   return (
@@ -28,22 +32,27 @@ function Header() {
             <Link className="nav-link" to="/Series">Series</Link>
           </li>
 
-          {sesionExistente() ?
-            (<li className="nav-item">
-              <Link className="nav-link" to="/Favorites">Favoritas</Link>
-            </li>
-            ) : null}
+          {sesionExistente() ? (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="/Favorites">Favoritas</Link>
+              </li>
 
-          {!sesionExistente() ? (
+              <li className="nav-item">
+                <MiPerfil history={props.history} />
+              </li>
+            </>
+          ) : (
             <>
               <li className="nav-item ml-auto">
                 <Link className="nav-link" to="/Register">Registro</Link>
               </li>
+
               <li className="nav-item">
                 <Link className="nav-link" to="/Login">Login</Link>
               </li>
             </>
-          ) : null}
+          )}
 
         </ul>
       </nav>

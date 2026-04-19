@@ -11,7 +11,7 @@ class MiPerfil extends Component {
 
 
     logout() {
-        cookies.remove('user-auth-cookie')
+        cookies.remove('auth-user')
         this.props.history.push("/Login");
     };
 
