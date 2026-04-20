@@ -35,7 +35,7 @@ function Header(props) {
           {sesionExistente() ? (
             <>
               <li className="nav-item">
-                <Link className="nav-link" to="/Favorites">Favoritas</Link>
+                <Link className="nav-link" to="/Favoritos">Favoritos</Link>
               </li>
 
               <li className="nav-item">
