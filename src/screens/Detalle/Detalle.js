@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
@@ -42,7 +41,7 @@ class Detalle extends Component {
     }
 
 
-    agregarAFavoritos = () => {
+    agregarAFavoritos() {
         let id = this.state.detalle.id;
         let categoria = this.props.match.params.categoria;
 
@@ -123,7 +122,7 @@ class Detalle extends Component {
                             </p>
 
 
-                            {sesionExiste ? <button onClick={this.agregarAFavoritos}>⭐</button> : null}
+                            {sesionExiste ? <button onClick={this.agregarAFavoritos}>⭐ ❌</button> : null}
                         </div>
                     </div>
 
@@ -142,7 +141,7 @@ class Detalle extends Component {
                             <p>
                                 Genre: {generosAMostrar.map((genero, i) => (
                                     <span key={genero.id}>
-                                        {genero.name}
+                                        {genero.name} 
                                     </span>
                                 ))}
                             </p>

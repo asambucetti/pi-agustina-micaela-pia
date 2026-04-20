@@ -30,7 +30,7 @@ class Peliculas extends Component {
     render() {
         return (
             <div>
-            {this.state.cargandoPeliculas ? (
+                {this.state.cargandoPeliculas ? (
                     <h3>Cargando Peliculas...</h3>
                 ) : this.state.peliculas.length === 0 ? (
                     <h3>No hay Peliculas</h3>
@@ -51,9 +51,9 @@ class Peliculas extends Component {
                             ))}
                         </section>
                     </div>
-                    
+
                 )
-            }
+                }
             </div>
         );
     }

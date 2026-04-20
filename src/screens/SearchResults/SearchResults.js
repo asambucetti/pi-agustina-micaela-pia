@@ -21,10 +21,10 @@ class SearchResults extends Component {
     componentDidMount() {
         const valor = this.props.match.params.nombre;
 
-        console.log(this.props.match.params.nombre, "parametros")
+
 
         /*hago dos fetch, primero el de peliculas y despues el de series*/
-        fetch(`https://api.themoviedb.org/3/search/movie?&query=${valor}&api_key=${apiKey}`)
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${valor}`)
             .then(response => response.json())
             .then(data => this.setState(
                 {

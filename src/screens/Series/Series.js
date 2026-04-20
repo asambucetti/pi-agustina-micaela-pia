@@ -64,8 +64,6 @@ class Series extends Component {
         <h2 className="alert alert-warning">Todas las series</h2>
         {this.state.cargandoSeries ? (
           <h3>Cargando Series...</h3>
-        ) : this.state.series.length === 0 ? (
-          <h3>No hay Series</h3>
         ) : (
           <div>
             <Filtro

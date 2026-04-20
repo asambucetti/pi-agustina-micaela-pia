@@ -9,7 +9,7 @@ function Login() {
             <div className="row justify-content-center">
                 <div className="col-md-6">
 
-                    <FormLogin/>
+                    <FormLogin />
 
                 </div>
             </div>

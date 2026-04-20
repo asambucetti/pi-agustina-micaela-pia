@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies()
@@ -27,7 +27,7 @@ class FormLogin extends Component {
     submit(event) {
         event.preventDefault();
 
-        const usersStorage = localStorage.getItem("users");
+        let usersStorage = localStorage.getItem("users");
 
         if (usersStorage === null) {
             this.setState({ error: "Las credenciales ingresadas son inválidas" })

@@ -28,25 +28,25 @@ class Series extends Component {
     render() {
         return (
             <div>
-            {this.state.cargandoSeries ? (
+                {this.state.cargandoSeries ? (
                     <h3>Cargando Series...</h3>
                 ) : this.state.series.length === 0 ? (
                     <h3>No hay Series</h3>
                 ) : (
-            <section className="row cards">
-                {this.state.series.map((serie, idx) => (
-                    <Card
-                        key={idx}
-                        id={serie.id}
-                        clase="single-card-tv"
-                        categoria="tv"
-                        titulo={serie.name}
-                        descripcion={serie.overview}
-                        img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
-                        storageKey="favoritosSeries"
-                    />
-                ))}
-            </section>
+                    <section className="row cards">
+                        {this.state.series.map((serie, idx) => (
+                            <Card
+                                key={idx}
+                                id={serie.id}
+                                clase="single-card-tv"
+                                categoria="tv"
+                                titulo={serie.name}
+                                descripcion={serie.overview}
+                                img={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`}
+                                storageKey="favoritosSeries"
+                            />
+                        ))}
+                    </section>
                 )}
             </div>
         );

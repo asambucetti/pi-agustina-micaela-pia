@@ -10,7 +10,6 @@ import Favoritos from './screens/Favoritos/Favoritos';
 import Register from './screens/Register/Register';
 import Detalle from './screens/Detalle/Detalle';
 import Peliculas from './screens/Peliculas/Peliculas';
-import MiPerfil from './screens/MiPerfil/MiPerfil';
 import Login from './screens/Login/Login';
 
 
@@ -20,22 +19,19 @@ function App() {
     <div className="container">
 
 
-      <div className="logo">
-        <img src="/img/logo.png" alt="logo" />
-      </div>
+
       <Header />
 
 
       <Switch>
         <Route path="/" exact={true} component={Home} />
-        <Route path="/Login" component={Login} /> 
+        <Route path="/Login" component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/Favoritos" component={Favoritos} />
         <Route path="/Peliculas" component={Peliculas} />
         <Route path="/Series" component={Series} />
         <Route path="/SearchResults/:nombre" component={SearchResults} />
         <Route path="/Detalle/:categoria/:id" component={Detalle} />
-        <Route path="/MiPerfil" component={MiPerfil} />
         <Route path="" component={NotFound} />
       </Switch>
 

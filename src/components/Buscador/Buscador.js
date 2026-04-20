@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class Buscador extends Component {
 
@@ -18,13 +18,13 @@ class Buscador extends Component {
         this.props.history.push("/SearchResults/" + this.state.valor)
     }
 
-   
+
     controlarCambios(event) {
         this.setState({ valor: event.target.value }, () => console.log(this.state.valor))
 
     }
 
-   
+
     render() {
         return (
             <>
@@ -39,5 +39,5 @@ class Buscador extends Component {
     }
 }
 
-export default withRouter (Buscador);
+export default withRouter(Buscador);
 

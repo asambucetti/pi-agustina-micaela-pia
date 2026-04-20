@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies()
 
-class MiPerfil extends Component {
+class Logout extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -29,4 +29,4 @@ class MiPerfil extends Component {
 }
 
 
-export default MiPerfil;
+export default Logout;

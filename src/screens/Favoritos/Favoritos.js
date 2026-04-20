@@ -1,6 +1,5 @@
-
 import React, { Component } from 'react';
-import Cookies from 'universal-cookie'
+import Cookies from 'universal-cookie';
 import Card from '../../components/Card/Card';
 
 const apiKey = "5c6cfdfae06798b19907f4b6448f6847";
@@ -21,7 +20,7 @@ class Favoritos extends Component {
         let storagePeliculas = localStorage.getItem("favoritosPeliculas");
         storagePeliculas = JSON.parse(storagePeliculas);
 
-        if (storagePeliculas === null || storagePeliculas.length === 0 ) {
+        if (storagePeliculas === null || storagePeliculas.length === 0) {
             this.setState({
                 peliculasFavoritas: [],
                 cargandoPeliculas: false
@@ -50,7 +49,7 @@ class Favoritos extends Component {
         let storageSeries = localStorage.getItem("favoritosSeries");
         storageSeries = JSON.parse(storageSeries);
 
-        if (storageSeries === null || storageSeries.length === 0 ) {
+        if (storageSeries === null || storageSeries.length === 0) {
             this.setState({
                 seriesFavoritas: [],
                 cargandoSeries: false
@@ -82,7 +81,7 @@ class Favoritos extends Component {
         let usuario = cookies.get('auth-user');
         if (usuario === undefined) {
             return <h3>Debés iniciar sesión para ver favoritos</h3>;
-        } 
+        }
         return (<div className="container">
             <h2 className="alert alert-primary">Películas favoritas</h2>
             {this.state.cargandoPeliculas ? (

@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import Card from '../../components/Card/Card';
 import Filtro from '../../components/Filtro/Filtro';
@@ -11,7 +10,7 @@ class Peliculas extends Component {
       peliculas: [],
       pagina: 1,
       busqueda: '',
-      cargando: true
+      cargandoPeliculas: true
     };
   }
 
@@ -22,14 +21,13 @@ class Peliculas extends Component {
       .then(data =>
         this.setState({
           peliculas: data.results,
-          cargando: false
+          cargandoPeliculas: false
         })
       )
       .catch(error => console.log(error));
   }
 
   cargarMas() {
-    this.setState({ cargando: true });
     let paginaSiguiente = this.state.pagina + 1;
 
     fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${paginaSiguiente}`)
@@ -38,7 +36,7 @@ class Peliculas extends Component {
         this.setState({
           peliculas: this.state.peliculas.concat(data.results),
           pagina: paginaSiguiente,
-          cargando: false
+          cargandoPeliculas: false
         })
       )
       .catch(error => console.log(error));
@@ -63,34 +61,34 @@ class Peliculas extends Component {
 
       <div className="container">
         <h2 className="alert alert-primary">Todas las películas</h2>
-
-        <Filtro
-          controlarCambios={(event) => this.controlarCambios(event)}
-          evitarSubmit={(event) => this.evitarSubmit(event)}
-          valor={this.state.busqueda}
-        />
-        <button className="btn btn-info" onClick={() => this.cargarMas()}>
-          Cargar más
-        </button>
-
-         {this.state.cargando ? (
-          <h3>Cargando...</h3>
+        {this.state.cargandoPeliculas ? (
+          <h3>Cargando Peliculas...</h3>
         ) : (
-
-        <section className="row cards all-movies" id="movies">
-          {peliculasFiltradas.map((pelicula, idx) => (
-            <Card
-              key={idx}
-              id={pelicula.id}
-              categoria="movie"
-              clase="single-card-movie"
-              img={`https://image.tmdb.org/t/p/w342/${pelicula.poster_path}`}
-              titulo={pelicula.title}
-              descripcion={pelicula.overview}
-              storageKey="favoritosPeliculas" 
+          <div>
+            <Filtro
+              controlarCambios={(event) => this.controlarCambios(event)}
+              evitarSubmit={(event) => this.evitarSubmit(event)}
+              valor={this.state.busqueda}
             />
-          ))}
-        </section>
+            <button className="btn btn-info" onClick={() => this.cargarMas()}>
+              Cargar más
+            </button>
+
+            <section className="row cards all-movies" id="movies">
+              {peliculasFiltradas.map((pelicula, idx) => (
+                <Card
+                  key={idx}
+                  id={pelicula.id}
+                  categoria="movie"
+                  clase="single-card-movie"
+                  img={`https://image.tmdb.org/t/p/w342/${pelicula.poster_path}`}
+                  titulo={pelicula.title}
+                  descripcion={pelicula.overview}
+                  storageKey="favoritosPeliculas"
+                />
+              ))}
+            </section>
+          </div>
         )}
       </div>
     );
