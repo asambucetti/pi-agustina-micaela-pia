@@ -94,15 +94,13 @@ class Favoritos extends Component {
         }
         return (<div className="container">
             <h2 className="alert alert-primary">Películas favoritas</h2>
-            {this.state.cargandoPeliculas ? (
-                <h3>Cargando películas...</h3>
-            ) : this.state.peliculasFavoritas.length === 0 ? (
+            {this.state.cargandoPeliculas ? ( <h3>Cargando películas...</h3>) : this.state.peliculasFavoritas.length === 0 ? (
                 <h3>No hay películas agregadas a favoritos</h3>
             ) : (
                 <section className="row cards" id="movies">
                     {this.state.peliculasFavoritas.map((pelicula, idx) => (
                         <Card
-                            key={idx}
+                            key={pelicula.id}
                             id={pelicula.id}
                             categoria="movie"
                             clase="single-card-movie"
@@ -125,7 +123,7 @@ class Favoritos extends Component {
                 <section className="row cards" id="tv-show">
                     {this.state.seriesFavoritas.map((serie, idx) => (
                         <Card
-                            key={idx}
+                            key={serie.id}
                             id={serie.id}
                             categoria="tv"
                             clase="single-card-tv"
