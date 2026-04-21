@@ -10,13 +10,16 @@ class Detalle extends Component {
         super(props)
         this.state = {
             detalle: null,
-            generos: []
+            generos: [],
+            textoFavorito: "Agregar a favoritos",
+            id: this.props.match.params.id
         }
     }
 
     componentDidMount() {
-        let id = this.props.match.params.id;
+        let id = this.state.id
         let categoria = this.props.match.params.categoria; //pelicula o serie
+
 
         //fetch detalle
         fetch(`https://api.themoviedb.org/3/${categoria}/${id}?api_key=${apiKey}`)
@@ -38,30 +41,62 @@ class Detalle extends Component {
                 });
             })
             .catch(error => console.log(error));
+
+
+        // dejar o sacar favoritos
+        let storage = localStorage.getItem(this.props.storageKey);
+        storage = JSON.parse(storage);
+
+        if (storage !== null) {
+            let esFavorito = storage.includes(this.props.id);
+
+            this.setState({
+                textoFavorito: esFavorito ? "Sacar de favoritos" : "Agregar a favoritos"
+            });
+        }
+
     }
 
 
-    agregarAFavoritos() {
-        let id = this.state.detalle.id;
-        let categoria = this.props.match.params.categoria;
-
-        // elijo clave segun categoria
-        let storageKey = categoria === "movie" ? "favoritosPeliculas" : "favoritosSeries";
-
-        let favoritos = JSON.parse(localStorage.getItem(storageKey));
-
-        if (favoritos === null) {
-            favoritos = [];
+    cambioFavorito() {
+        let id = this.state.id;
+        let storage = [];
+        console.log(this.props.match.params.categoria);
+        
+        if (this.props.match.params.categoria === "movie") {
+            // console.log(localStorage.getItem("favoritosPeliculas"));
+            storage = localStorage.getItem("favoritosPeliculas");
+        } else {
+            storage = localStorage.getItem("favoritosSeries");
         }
+        console.log(id);
+        if (this.state.textoFavorito === "Agregar a favoritos") {
 
-        if (favoritos.includes(id) === false) {
-            favoritos.push(id);
+            if (storage === null) {               
+                let arrayFavoritos = [id];
+                let storageString = JSON.stringify(arrayFavoritos)
+                localStorage.setItem("favoritosPeliculas", storageString);
+            } else {
+                let arrayFavoritos = JSON.parse(storage);
+                arrayFavoritos.push(id);
+                let storageString = JSON.stringify(arrayFavoritos);
+                localStorage.setItem("favoritosSeries", storageString);
+            }
+
+            this.setState({
+                textoFavorito: "Sacar de favoritos"
+            });
+
+        } else {
+            let storageParse = JSON.parse(storage);
+            let storageFiltrado = storageParse.filter((elemento) => elemento !== id);
+            let storageString = JSON.stringify(storageFiltrado);
+            localStorage.setItem(this.props.storageKey, storageString);
+            this.setState({
+                textoFavorito: "Agregar a favoritos"
+            });
         }
-
-        localStorage.setItem(storageKey, JSON.stringify(favoritos))
-
-        // esta alerta esta de mas pero sirve
-        alert("Agregado a favoritos");
+        console.log("hola")
     }
 
 
@@ -70,10 +105,7 @@ class Detalle extends Component {
 
     render() {
         let categoria = this.props.match.params.categoria;
-        let sesionExiste = cookies.get('auth-user');
-
-        console.log(cookies.get('auth-user'));
-
+        let usuario = cookies.get('auth-user');
 
         if (this.state.detalle === null) {
             return <p>Cargando...</p>
@@ -122,7 +154,12 @@ class Detalle extends Component {
                             </p>
 
 
-                            {sesionExiste ? <button onClick={this.agregarAFavoritos}>⭐ ❌</button> : null}
+                            {usuario ? (
+                                <button className="btn btn-primary btn-fav"
+                                    onClick={() => this.cambioFavorito()}>
+                                    {this.state.textoFavorito}
+                                </button>
+                            ) : null}
                         </div>
                     </div>
 
@@ -141,13 +178,18 @@ class Detalle extends Component {
                             <p>
                                 Genre: {generosAMostrar.map((genero, i) => (
                                     <span key={genero.id}>
-                                        {genero.name} 
+                                        {genero.name}
                                     </span>
                                 ))}
                             </p>
 
 
-                            {sesionExiste ? <button onClick={this.agregarAFavoritos}>⭐</button> : null}
+                            {usuario ? (
+                                <button className="btn btn-primary btn-fav"
+                                    onClick={() => this.cambioFavorito()}>
+                                    {this.state.textoFavorito}
+                                </button>
+                            ) : null}
                         </div>
                     </div>
 

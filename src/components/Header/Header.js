@@ -9,16 +9,7 @@ const cookies = new Cookies();
 
 function Header(props) {
 
-
-  function sesionExistente() {
-    let usuario = cookies.get('auth-user');
-
-    if (usuario === undefined) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  let usuario = cookies.get('auth-user');
 
   return (
     <div className="container">
@@ -37,7 +28,7 @@ function Header(props) {
             <Link className="nav-link" to="/Series">Series</Link>
           </li>
 
-          {sesionExistente() ? (
+          {(usuario !== undefined) ? (
             <>
               <li className="nav-item">
                 <Link className="nav-link" to="/Favoritos">Favoritos</Link>

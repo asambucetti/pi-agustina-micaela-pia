@@ -42,15 +42,9 @@ class Card extends Component {
         }
     }
 
-    sesionExiste() {
-        let usuario = cookies.get('auth-user');
 
-        if (usuario === undefined) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+
+
     cambioFavorito() {
         let id = this.props.id;
         let storage = localStorage.getItem(this.props.storageKey);
@@ -83,39 +77,40 @@ class Card extends Component {
     }
 
 
+render() {
+    let usuario = cookies.get('auth-user');
 
-    render() {
-        return (
-            <article className={this.props.clase}>
-                <img
-                    src={this.props.img}
-                    className="card-img-top"
-                    alt={this.props.titulo}
-                />
-                <div className="cardBody">
-                    <h5 className="card-title">{this.props.titulo}</h5>
+    return (
+        <article className={this.props.clase}>
+            <img
+                src={this.props.img}
+                className="card-img-top"
+                alt={this.props.titulo}
+            />
+            <div className="cardBody">
+                <h5 className="card-title">{this.props.titulo}</h5>
 
-                    <p className={this.state.clase}>{this.props.descripcion}</p>
+                <p className={this.state.clase}>{this.props.descripcion}</p>
 
-                    <button className="btn btn-primary btn-card"
-                        onClick={() => this.cambioDescrip()}>
-                        {this.state.textoBoton}
+                <button className="btn btn-primary btn-card"
+                    onClick={() => this.cambioDescrip()}>
+                    {this.state.textoBoton}
+                </button>
+
+                <Link to={`/detalle/${this.props.categoria}/${this.props.id}`} className="btn btn-primary btn-card">
+                    Ir a detalle
+                </Link>
+
+                {(usuario !== undefined) ? (
+                    <button className="btn btn-primary btn-fav"
+                        onClick={() => this.cambioFavorito()}>
+                        {this.state.textoFavorito}
                     </button>
-
-                    <Link to={`/detalle/${this.props.categoria}/${this.props.id}`} className="btn btn-primary btn-card">
-                        Ir a detalle
-                    </Link>
-
-                    {this.sesionExiste() ? (
-                        <button className="btn btn-primary btn-fav"
-                            onClick={() => this.cambioFavorito()}>
-                            {this.state.textoFavorito}
-                        </button>
-                    ) : null}
-                </div>
-            </article>
-        );
-    }
+                ) : null}
+            </div>
+        </article>
+    );
+}
 }
 
 
