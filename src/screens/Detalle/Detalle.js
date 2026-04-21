@@ -19,27 +19,24 @@ class Detalle extends Component {
         let id = this.props.match.params.id;
         let categoria = this.props.match.params.categoria; //pelicula o serie
         let storageKey = categoria === "movie" ? "favoritosPeliculas" : "favoritosSeries";
-        let storage = localStorage.getItem(storageKey);
-        storage = JSON.parse(storage);
-
-
-        if (storage !== null) {
-            let esFavorito = storage.includes(id);
-
-            this.setState({
-                textoFavorito: esFavorito ? "Sacar de favoritos" : "Agregar a favoritos"
-            });
-        }
-
-
 
 
         //fetch detalle
         fetch(`https://api.themoviedb.org/3/${categoria}/${id}?api_key=${apiKey}`)
             .then(res => res.json())
             .then(data => {
+                let storage = localStorage.getItem(storageKey)
+                let arrayFavoritos = []
+
+                if (storage !== null) {
+                    arrayFavoritos = JSON.parse(storage);
+                }
+
+                let esFavorito = arrayFavoritos.includes(data.id);
+
                 this.setState({
-                    detalle: data
+                    detalle: data,
+                    textoFavorito: esFavorito ? "Sacar de favoritos" : "Agregar a favoritos"
                 });
             })
             .catch(error => console.log(error));
@@ -61,35 +58,37 @@ class Detalle extends Component {
 
 
     cambioFavorito() {
-        let id = this.props.match.params.id;
         let categoria = this.props.match.params.categoria;
-
+        let id = this.state.detalle.id
         let storageKey = categoria === "movie" ? "favoritosPeliculas" : "favoritosSeries";
         let storage = localStorage.getItem(storageKey);
 
+        let arrayFavoritos = []
+
+        if (storage !== null) {
+            arrayFavoritos = JSON.parse(storage);
+        }
+
+
         if (this.state.textoFavorito === "Agregar a favoritos") {
 
-            if (storage === null) {
-                let arrayFavoritos = [id];
-                localStorage.setItem(storageKey, JSON.stringify(arrayFavoritos));
-            } else {
-                let arrayFavoritos = JSON.parse(storage);
+            if (!arrayFavoritos.includes(id)) {
                 arrayFavoritos.push(id);
-                localStorage.setItem(storageKey, JSON.stringify(arrayFavoritos));
-            }
+            };
 
+            localStorage.setItem(storageKey, JSON.stringify(arrayFavoritos));
             this.setState({
                 textoFavorito: "Sacar de favoritos"
             });
+        }
 
-        } else {
+        else {
 
-            let storageParse = JSON.parse(storage);
-            let storageFiltrado = storageParse.filter(
+            let filtrado = arrayFavoritos.filter(
                 (elemento) => elemento !== id
             );
 
-            localStorage.setItem(storageKey, JSON.stringify(storageFiltrado));
+            localStorage.setItem(storageKey, JSON.stringify(filtrado));
 
             this.setState({
                 textoFavorito: "Agregar a favoritos"
