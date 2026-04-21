@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
+import { withRouter } from 'react-router-dom';
 
 const cookies = new Cookies()
 
@@ -29,4 +30,4 @@ class Logout extends Component {
 }
 
 
-export default Logout;
+export default withRouter(Logout);

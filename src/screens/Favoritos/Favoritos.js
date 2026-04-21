@@ -94,7 +94,7 @@ class Favoritos extends Component {
         }
         return (<div className="container">
             <h2 className="alert alert-primary">Películas favoritas</h2>
-            {this.state.cargandoPeliculas ? ( <h3>Cargando películas...</h3>) : this.state.peliculasFavoritas.length === 0 ? (
+            {this.state.cargandoPeliculas ? (<h3>Cargando películas...</h3>) : this.state.peliculasFavoritas.length === 0 ? (
                 <h3>No hay películas agregadas a favoritos</h3>
             ) : (
                 <section className="row cards" id="movies">

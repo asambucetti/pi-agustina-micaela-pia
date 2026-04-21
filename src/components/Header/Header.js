@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import MiPerfil from '../Logout/Logout';
+import Logout from '../Logout/Logout';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
@@ -35,7 +35,7 @@ function Header(props) {
               </li>
 
               <li className="nav-item">
-                <MiPerfil history={props.history} />
+                <Logout history={props.history} />
               </li>
             </>
           ) : (

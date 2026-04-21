@@ -20,8 +20,7 @@ class Buscador extends Component {
 
 
     controlarCambios(event) {
-        this.setState({ valor: event.target.value }, () => console.log(this.state.valor))
-
+        this.setState({ valor: event.target.value })
     }
 
 
