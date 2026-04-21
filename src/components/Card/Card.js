@@ -72,6 +72,11 @@ class Card extends Component {
             this.setState({
                 textoFavorito: "Agregar a favoritos",
             });
+
+            // elemento hijo le pasa al padre (favoritos.js) pq ejecuta una funcionq ue vivie en el padre entonces le pasa el id del elemento a eliminar
+            if (this.props.actualizacion) {
+                this.props.actualizacion(id);
+            }
         }
     }
 

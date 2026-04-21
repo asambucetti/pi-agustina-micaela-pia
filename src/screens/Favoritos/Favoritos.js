@@ -76,6 +76,16 @@ class Favoritos extends Component {
         }
     }
 
+    actualizarFavoritos(id, tipo) {
+        if (tipo === "movie") {
+            let filtradas = this.state.peliculasFavoritas.filter(peli => peli.id !== id);
+            this.setState({ peliculasFavoritas: filtradas });
+        } else {
+            let filtradas = this.state.seriesFavoritas.filter(serie => serie.id !== id);
+            this.setState({ seriesFavoritas: filtradas });
+        }
+    }
+
 
     render() {
         let usuario = cookies.get('auth-user');
@@ -100,6 +110,7 @@ class Favoritos extends Component {
                             titulo={pelicula.title}
                             descripcion={pelicula.overview}
                             storageKey="favoritosPeliculas"
+                            actualizacion={(id) => this.actualizarFavoritos(id, "movie")}
                         />
                     ))}
                 </section>
@@ -122,6 +133,7 @@ class Favoritos extends Component {
                             titulo={serie.name}
                             descripcion={serie.overview}
                             storageKey="favoritosSeries"
+                            actualizacion={(id) => this.actualizarFavoritos(id, "tv")}
                         />
                     ))}
                 </section>
