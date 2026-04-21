@@ -10,22 +10,23 @@ class Card extends Component {
         this.state = {
             textoBoton: "Ver descripción",
             clase: "hide",
-            textoFavorito: "Agregar a favoritos"
+            textoFavorito: "Agregar a favoritos",
+            visible: true
         }
     }
 
     componentDidMount() {
-        let storage = localStorage.getItem(this.props.storageKey);
-        storage = JSON.parse(storage);
+    let storage = localStorage.getItem(this.props.storageKey);
+    storage = JSON.parse(storage);
 
-        if (storage !== null) {
-            let esFavorito = storage.includes(this.props.id);
+    if (storage !== null) {
+        let esFavorito = storage.filter((elemento) => elemento == this.props.id);
 
-            this.setState({
-                textoFavorito: esFavorito ? "Sacar de favoritos" : "Agregar a favoritos"
-            });
-        }
+        this.setState({
+            textoFavorito: esFavorito.length > 0 ? "Sacar de favoritos" : "Agregar a favoritos"
+        });
     }
+}
 
 
     cambioDescrip() {
@@ -67,50 +68,55 @@ class Card extends Component {
 
         } else {
             let storageParse = JSON.parse(storage);
-            let storageFiltrado = storageParse.filter((elemento) => elemento !== id);
+            let storageFiltrado = storageParse.filter((elemento) => elemento != id); 
             let storageString = JSON.stringify(storageFiltrado);
             localStorage.setItem(this.props.storageKey, storageString);
             this.setState({
-                textoFavorito: "Agregar a favoritos"
+                textoFavorito: "Agregar a favoritos",
+                visible: false
             });
         }
     }
 
 
-render() {
-    let usuario = cookies.get('auth-user');
+    render() {
+        let usuario = cookies.get('auth-user');
 
-    return (
-        <article className={this.props.clase}>
-            <img
-                src={this.props.img}
-                className="card-img-top"
-                alt={this.props.titulo}
-            />
-            <div className="cardBody">
-                <h5 className="card-title">{this.props.titulo}</h5>
+        if (this.state.visible === false) {
+            return null;
+        }
 
-                <p className={this.state.clase}>{this.props.descripcion}</p>
+        return (
+            <article className={this.props.clase}>
+                <img
+                    src={this.props.img}
+                    className="card-img-top"
+                    alt={this.props.titulo}
+                />
+                <div className="cardBody">
+                    <h5 className="card-title">{this.props.titulo}</h5>
 
-                <button className="btn btn-primary btn-card"
-                    onClick={() => this.cambioDescrip()}>
-                    {this.state.textoBoton}
-                </button>
+                    <p className={this.state.clase}>{this.props.descripcion}</p>
 
-                <Link to={`/detalle/${this.props.categoria}/${this.props.id}`} className="btn btn-primary btn-card">
-                    Ir a detalle
-                </Link>
-
-                {(usuario !== undefined) ? (
-                    <button className="btn btn-primary btn-fav"
-                        onClick={() => this.cambioFavorito()}>
-                        {this.state.textoFavorito}
+                    <button className="btn btn-primary btn-card"
+                        onClick={() => this.cambioDescrip()}>
+                        {this.state.textoBoton}
                     </button>
-                ) : null}
-            </div>
-        </article>
-    );
-}
+
+                    <Link to={`/detalle/${this.props.categoria}/${this.props.id}`} className="btn btn-primary btn-card">
+                        Ir a detalle
+                    </Link>
+
+                    {(usuario !== undefined) ? (
+                        <button className="btn btn-primary btn-fav"
+                            onClick={() => this.cambioFavorito()}>
+                            {this.state.textoFavorito}
+                        </button>
+                    ) : null}
+                </div>
+            </article>
+        );
+    }
 }
 
 

@@ -12,13 +12,26 @@ class Detalle extends Component {
             detalle: null,
             generos: [],
             textoFavorito: "Agregar a favoritos",
-            id: this.props.match.params.id
         }
     }
 
     componentDidMount() {
-        let id = this.state.id
+        let id = this.props.match.params.id;
         let categoria = this.props.match.params.categoria; //pelicula o serie
+        let storageKey = categoria === "movie" ? "favoritosPeliculas" : "favoritosSeries";
+        let storage = localStorage.getItem(storageKey);
+        storage = JSON.parse(storage);
+
+
+        if (storage !== null) {
+            let esFavorito = storage.includes(id);
+
+            this.setState({
+                textoFavorito: esFavorito ? "Sacar de favoritos" : "Agregar a favoritos"
+            });
+        }
+
+
 
 
         //fetch detalle
@@ -41,46 +54,28 @@ class Detalle extends Component {
                 });
             })
             .catch(error => console.log(error));
-
-
-        // dejar o sacar favoritos
-        let storage = localStorage.getItem(this.props.storageKey);
-        storage = JSON.parse(storage);
-
-        if (storage !== null) {
-            let esFavorito = storage.includes(this.props.id);
-
-            this.setState({
-                textoFavorito: esFavorito ? "Sacar de favoritos" : "Agregar a favoritos"
-            });
-        }
-
     }
 
 
+
+
+
     cambioFavorito() {
-        let id = this.state.id;
-        let storage = [];
-        console.log(this.props.match.params.categoria);
-        
-        if (this.props.match.params.categoria === "movie") {
-            // console.log(localStorage.getItem("favoritosPeliculas"));
-            storage = localStorage.getItem("favoritosPeliculas");
-        } else {
-            storage = localStorage.getItem("favoritosSeries");
-        }
-        console.log(id);
+        let id = this.props.match.params.id;
+        let categoria = this.props.match.params.categoria;
+
+        let storageKey = categoria === "movie" ? "favoritosPeliculas" : "favoritosSeries";
+        let storage = localStorage.getItem(storageKey);
+
         if (this.state.textoFavorito === "Agregar a favoritos") {
 
-            if (storage === null) {               
+            if (storage === null) {
                 let arrayFavoritos = [id];
-                let storageString = JSON.stringify(arrayFavoritos)
-                localStorage.setItem("favoritosPeliculas", storageString);
+                localStorage.setItem(storageKey, JSON.stringify(arrayFavoritos));
             } else {
                 let arrayFavoritos = JSON.parse(storage);
                 arrayFavoritos.push(id);
-                let storageString = JSON.stringify(arrayFavoritos);
-                localStorage.setItem("favoritosSeries", storageString);
+                localStorage.setItem(storageKey, JSON.stringify(arrayFavoritos));
             }
 
             this.setState({
@@ -88,19 +83,19 @@ class Detalle extends Component {
             });
 
         } else {
+
             let storageParse = JSON.parse(storage);
-            let storageFiltrado = storageParse.filter((elemento) => elemento !== id);
-            let storageString = JSON.stringify(storageFiltrado);
-            localStorage.setItem(this.props.storageKey, storageString);
+            let storageFiltrado = storageParse.filter(
+                (elemento) => elemento !== id
+            );
+
+            localStorage.setItem(storageKey, JSON.stringify(storageFiltrado));
+
             this.setState({
                 textoFavorito: "Agregar a favoritos"
             });
         }
-        console.log("hola")
     }
-
-
-
 
 
     render() {
@@ -111,23 +106,15 @@ class Detalle extends Component {
             return <p>Cargando...</p>
         }
 
-
-
         let generosAMostrar = [];
 
-        // Caso 1: detalle trae genre_ids
         if (this.state.detalle.genre_ids) {
-            generosAMostrar = this.state.generos.filter(genero => // Con filter, me quedo solamente con los géneros cuyo id esté incluido dentro de genre_ids
+            generosAMostrar = this.state.generos.filter(genero =>
                 this.state.detalle.genre_ids.includes(genero.id)
             );
-        }
-
-        // Caso 2: detalle trae genres
-        else if (this.state.detalle.genres) {
+        } else if (this.state.detalle.genres) {
             generosAMostrar = this.state.detalle.genres;
         }
-
-
 
         return (
             <article className="container">
@@ -145,18 +132,15 @@ class Detalle extends Component {
                             <p>Rating: {this.state.detalle.vote_average}</p>
                             <p>Release date: {this.state.detalle.release_date}</p>
                             <p>{this.state.detalle.overview}</p>
+
                             <p>
-                                Genre: {generosAMostrar.map((genero, i) => (
-                                    <span key={genero.id}>
-                                        {genero.name}
-                                    </span>
+                                Genre: {generosAMostrar.map((genero) => (
+                                    <span key={genero.id}>{genero.name} </span>
                                 ))}
                             </p>
 
-
                             {usuario ? (
-                                <button className="btn btn-primary btn-fav"
-                                    onClick={() => this.cambioFavorito()}>
+                                <button className="btn btn-primary btn-fav" onClick={() => this.cambioFavorito()}>
                                     {this.state.textoFavorito}
                                 </button>
                             ) : null}
@@ -170,35 +154,31 @@ class Detalle extends Component {
                             src={`https://image.tmdb.org/t/p/w342/${this.state.detalle.poster_path}`}
                             alt={this.state.detalle.name}
                         />
+
                         <div className="cardBody">
                             <h5 className="card-title">{this.state.detalle.name}</h5>
+
                             <p>Rating: {this.state.detalle.vote_average}</p>
                             <p>Release date: {this.state.detalle.first_air_date}</p>
                             <p>{this.state.detalle.overview}</p>
+
                             <p>
-                                Genre: {generosAMostrar.map((genero, i) => (
-                                    <span key={genero.id}>
-                                        {genero.name}
-                                    </span>
+                                Genre: {generosAMostrar.map((genero) => (
+                                    <span key={genero.id}>{genero.name} </span>
                                 ))}
                             </p>
 
-
                             {usuario ? (
-                                <button className="btn btn-primary btn-fav"
-                                    onClick={() => this.cambioFavorito()}>
+                                <button className="btn btn-primary btn-fav" onClick={() => this.cambioFavorito()}>
                                     {this.state.textoFavorito}
                                 </button>
                             ) : null}
                         </div>
                     </div>
-
-
                 )}
 
             </article>
         );
-
     }
 }
 
