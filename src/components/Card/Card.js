@@ -11,22 +11,20 @@ class Card extends Component {
             textoBoton: "Ver descripción",
             clase: "hide",
             textoFavorito: "Agregar a favoritos",
-            visible: true
         }
     }
 
     componentDidMount() {
-    let storage = localStorage.getItem(this.props.storageKey);
-    storage = JSON.parse(storage);
+        let storage = localStorage.getItem(this.props.storageKey);
+        storage = JSON.parse(storage);
 
-    if (storage !== null) {
-        let esFavorito = storage.filter((elemento) => elemento == this.props.id);
-
-        this.setState({
-            textoFavorito: esFavorito.length > 0 ? "Sacar de favoritos" : "Agregar a favoritos"
-        });
+        if (storage !== null) {
+            let esFavorito = storage.includes(this.props.id);
+            this.setState({
+                textoFavorito: esFavorito ? "Sacar de favoritos" : "Agregar a favoritos"
+            });
+        }
     }
-}
 
 
     cambioDescrip() {
@@ -68,12 +66,11 @@ class Card extends Component {
 
         } else {
             let storageParse = JSON.parse(storage);
-            let storageFiltrado = storageParse.filter((elemento) => elemento != id); 
+            let storageFiltrado = storageParse.filter((elemento) => elemento !== id);
             let storageString = JSON.stringify(storageFiltrado);
             localStorage.setItem(this.props.storageKey, storageString);
             this.setState({
                 textoFavorito: "Agregar a favoritos",
-                visible: false
             });
         }
     }
@@ -81,10 +78,6 @@ class Card extends Component {
 
     render() {
         let usuario = cookies.get('auth-user');
-
-        if (this.state.visible === false) {
-            return null;
-        }
 
         return (
             <article className={this.props.clase}>
@@ -95,7 +88,6 @@ class Card extends Component {
                 />
                 <div className="cardBody">
                     <h5 className="card-title">{this.props.titulo}</h5>
-
                     <p className={this.state.clase}>{this.props.descripcion}</p>
 
                     <button className="btn btn-primary btn-card"
@@ -106,7 +98,6 @@ class Card extends Component {
                     <Link to={`/detalle/${this.props.categoria}/${this.props.id}`} className="btn btn-primary btn-card">
                         Ir a detalle
                     </Link>
-
                     {(usuario !== undefined) ? (
                         <button className="btn btn-primary btn-fav"
                             onClick={() => this.cambioFavorito()}>
@@ -118,6 +109,5 @@ class Card extends Component {
         );
     }
 }
-
 
 export default Card;
