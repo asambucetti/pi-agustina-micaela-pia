@@ -1,58 +1,60 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-class FormRegister extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: "",
-            email: "",
-            password: "",
-            errorUsername: "",
-            errorEmail: "",
-            errorPassword: "",
-            errorGeneral: ""
-        };
-    }
+function FormRegister(props) {
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [errorUsername, setErrorUsername] = useState("")
+    const [errorEmail, setErrorEmail] = useState("")
+    const [errorPassword, setErrorPassword] = useState("")
+    const [errorGeneral, setErrorGeneral] = useState("")
 
-    /* uso los corchetes porque evalua el valor como una clave (clave dinamica--> la que pone el usuario*/
-    controlarCambios(event) {
-        this.setState({
-            [event.target.id]: event.target.value
+    function controlarCambios(event) {
+        if (event.target.id === "username"){
+            setUsername (event.target.value)
         }
-        );
+
+        if (event.target.id === "email"){
+            setEmail(event.target.value)
+        }
+
+        if (event.target.id === "password"){
+            setPassword(event.target.value)
+        }
+
     }
 
-    evitarSubmit(event) {
+    function evitarSubmit(event) {
         event.preventDefault();
 
         let usuarioACrear = {
-            username: this.state.username,
-            email: this.state.email,
-            password: this.state.password,
+            username: username,
+            email: email,
+            password: password,
             createdAt: Date.now()
         }
 
-        if (this.state.username.length < 3 || this.state.username.length > 7) {
-            this.setState({ errorUsername: "La extensión del username debe ser de 3 a 7 caracteres" })
+        if (username.length < 3 || username.length > 7) {
+            setErrorUsername("La extensión del username debe ser de 3 a 7 caracteres")
             return;
         } else {
-            this.setState({ errorUsername: "" })
+            setErrorUsername("")
         }
 
-        if (!this.state.email.includes("@")) {
-            this.setState({ errorEmail: "Email mal formateado" })
+        if (!email.includes("@")) {
+            setErrorEmail("Email mal formateado")
             return;
         } else {
-            this.setState({ errorEmail: "" })
+            setErrorEmail("")
         }
 
-        if (this.state.password.length < 5 || this.state.password.length > 12) {
-            this.setState({ errorPassword: "La extensión del password debe ser de 5 a 12 caracteres" })
+        if (password.length < 5 || password.length > 12) {
+            setErrorPassword("La extensión del password debe ser de 5 a 12 caracteres")
             return;
         } else {
-            this.setState({ errorPassword: "" })
+            setErrorPassword("")
         }
 
         /*primero debo traer lo que este guardado en el local storage a traves del metodo get,
@@ -65,14 +67,14 @@ class FormRegister extends Component{
         if (usersStorage !== null) {
             let usersParseado = JSON.parse(usersStorage);
 
-            let usersFiltrado = usersParseado.filter((user) => user.email === this.state.email);
+            let usersFiltrado = usersParseado.filter((user) => user.email === email);
 
             if (usersFiltrado.length > 0) {
-                this.setState({ errorGeneral: "Ya existe un usuario con el email ingresado" })
+                setErrorGeneral("Ya existe un usuario con el email ingresado")
                 return;
             }
 
-            this.setState({ errorGeneral: "" })
+            setErrorGeneral("")
 
             usersParseado.push(usuarioACrear)
 
@@ -91,56 +93,54 @@ class FormRegister extends Component{
         }
 
         /*Redireccion a login */
-        this.props.history.push("/Login");
+        props.history.push("/Login");
+
     }
 
+    return (
+        <div>
+            <form onSubmit={(event) => evitarSubmit(event)}>
+                <div className="form-group">
+                    <label htmlFor="username">Username</label>
+                    <input
+                        type="username"
+                        className="form-control"
+                        id="username"
+                        placeholder="Ingresá tu username"
+                        onChange={(event) => controlarCambios(event)} value={username} />
+                    <p>{errorUsername}</p>
+                </div>
 
+                <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        placeholder="Ingresá tu email"
+                        onChange={(event) => controlarCambios(event)} value={email} />
+                    <p>{errorEmail}</p>
+                </div>
 
-    render() {
-        return (
-            <div>
-                <form onSubmit={(event) => this.evitarSubmit(event)}>
-                    <div className="form-group">
-                        <label htmlFor="username">Username</label>
-                        <input
-                            type="username"
-                            className="form-control"
-                            id="username"
-                            placeholder="Ingresá tu username"
-                            onChange={(event) => this.controlarCambios(event)} value={this.state.username} />
-                        <p>{this.state.errorUsername}</p>
-                    </div>
+                <div className="form-group">
+                    <label htmlFor="password">Contraseña</label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        placeholder="Ingresá tu contraseña"
+                        onChange={(event) => controlarCambios(event)} value={password} />
+                    <p>{errorPassword}</p>
+                </div>
 
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            className="form-control"
-                            id="email"
-                            placeholder="Ingresá tu email"
-                            onChange={(event) => this.controlarCambios(event)} value={this.state.email} />
-                        <p>{this.state.errorEmail}</p>
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="password">Contraseña</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            id="password"
-                            placeholder="Ingresá tu contraseña"
-                            onChange={(event) => this.controlarCambios(event)} value={this.state.password} />
-                        <p>{this.state.errorPassword}</p>
-                    </div>
-
-                    <button type="submit" className="btn btn-primary btn-block">Register</button>
-                    <p>{this.state.errorGeneral}</p>
-                </form>
-                <p className="mt-3 text-center">¿Ya tenés cuenta? <Link to="/Login">Iniciar sesión</Link></p>
-            </div>
-        )
-    }
-
+                <button type="submit" className="btn btn-primary btn-block">Register</button>
+                <p>{errorGeneral}</p>
+            </form>
+            <p className="mt-3 text-center">¿Ya tenés cuenta? <Link to="/Login">Iniciar sesión</Link></p>
+        </div>
+    )
 }
+
+
 
 export default withRouter(FormRegister);
