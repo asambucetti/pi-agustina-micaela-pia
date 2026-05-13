@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-class FormRegister extends Component {
+function FormRegister{
     constructor(props) {
         super(props);
         this.state = {

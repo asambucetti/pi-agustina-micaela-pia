@@ -58,5 +58,4 @@ class Peliculas extends Component {
         );
     }
 }
-
 export default Peliculas; 

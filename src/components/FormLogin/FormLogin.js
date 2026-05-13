@@ -15,14 +15,12 @@ class FormLogin extends Component {
         };
     }
 
-
     controlarCambios(event) {
         this.setState({
             [event.target.id]: event.target.value
         }
         );
     }
-
 
     submit(event) {
         event.preventDefault();
