@@ -74,7 +74,6 @@ class Series extends Component {
             <button className="btn btn-warning" onClick={() => this.cargarMas()}>
               Cargar más
             </button>
-
             <section className="row cards all-series" id="series">
               {seriesFiltradas.map((serie, idx) => (
                 <Card

@@ -26,6 +26,8 @@ class Card extends Component {
         }
     }
 
+    // 👉 es para que el componente “arranque bien”. sincronizar el estado inicial del componente con los datos almacenados en localStorage y mostrar correctamente el estado del botón.”
+
 
     cambioDescrip() {
         if (this.state.textoBoton === "Ver descripción") {

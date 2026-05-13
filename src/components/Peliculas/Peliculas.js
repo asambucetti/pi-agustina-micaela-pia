@@ -1,43 +1,34 @@
 import React, { Component } from 'react';
 import Card from '../Card/Card';
+import { useState, useEffect } from "react";
+
 
 const apiKey = "5c6cfdfae06798b19907f4b6448f6847";
 
+function Peliculas() {
+    const [peliculas, setPeliculas] = useState([]);
+    const [cargandoPeliculas, setCargandoPeliculas] = useState(true);
 
-class Peliculas extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            peliculas: [],
-            cargandoPeliculas: true
-        };
-    }
-
-    componentDidMount() {
-
+    useEffect(() => {
         fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`)
             .then(res => res.json())
             .then(data => {
-                this.setState({
-                    peliculas: data.results,
-                    cargandoPeliculas: false
-                });
+                setPeliculas(data.results);
+                setCargandoPeliculas(false);
             })
             .catch(error => console.log(error));
-    }
+    }, []);
 
-    render() {
         return (
             <div>
-                {this.state.cargandoPeliculas ? (
+                {cargandoPeliculas ? (
                     <h3>Cargando Peliculas...</h3>
-                ) : this.state.peliculas.length === 0 ? (
+                ) : peliculas.length === 0 ? (
                     <h3>No hay Peliculas</h3>
                 ) : (
                     <div className="container">
                         <section className="row cards">
-                            {this.state.peliculas.map((peli, idx) => (
+                            {peliculas.map((peli, idx) => (
                                 <Card
                                     key={idx}
                                     id={peli.id}
@@ -57,5 +48,5 @@ class Peliculas extends Component {
             </div>
         );
     }
-}
+    
 export default Peliculas; 
