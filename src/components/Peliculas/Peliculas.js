@@ -48,10 +48,5 @@ function Peliculas() {
             </div>
         );
     }
-<<<<<<< HEAD
-
-
-=======
-}
->>>>>>> 2712dd02c6ed0e714e97e775ff19f4d29779c581
+    
 export default Peliculas; 
