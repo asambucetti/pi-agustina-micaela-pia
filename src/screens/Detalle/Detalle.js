@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
-
 const apiKey = "5c6cfdfae06798b19907f4b6448f6847";
 
 class Detalle extends Component {
@@ -19,8 +18,6 @@ class Detalle extends Component {
         let id = this.props.match.params.id;
         let categoria = this.props.match.params.categoria; //pelicula o serie
         let storageKey = categoria === "movie" ? "favoritosPeliculas" : "favoritosSeries";
-
-
         //fetch detalle
         fetch(`https://api.themoviedb.org/3/${categoria}/${id}?api_key=${apiKey}`)
             .then(res => res.json())
@@ -40,8 +37,6 @@ class Detalle extends Component {
                 });
             })
             .catch(error => console.log(error));
-
-
         //fetch generos
         fetch(`https://api.themoviedb.org/3/genre/${categoria}/list?api_key=${apiKey}`)
             .then(res => res.json())

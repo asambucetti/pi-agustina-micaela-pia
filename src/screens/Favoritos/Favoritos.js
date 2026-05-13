@@ -19,13 +19,11 @@ class Favoritos extends Component {
     componentDidMount() {
         let storagePeliculas = localStorage.getItem("favoritosPeliculas");
         storagePeliculas = JSON.parse(storagePeliculas);
-
         if (storagePeliculas === null || storagePeliculas.length === 0) {
             this.setState({
                 peliculasFavoritas: [],
                 cargandoPeliculas: false
             });
-
         } else {
             let peliculasRecuperadas = [];
 

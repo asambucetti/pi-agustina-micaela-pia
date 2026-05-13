@@ -1,41 +1,30 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 
-class Buscador extends Component {
+function Buscador(props){
+    const [valor, setValor]  = useState("")
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            datos: [],
-            valor: '',
-        }
+    /* valor es el estado actual y setValor la funcion para cambiarlo */
 
-    }
-
-
-    evitarSubmit(event) {
+    /* valor es lo que el usuario escribe en el input */
+    function evitarSubmit(event){
         event.preventDefault();
-        this.props.history.push("/SearchResults/" + this.state.valor)
+        props.history.push("/SearchResults/" + valor)
+
     }
 
-
-    controlarCambios(event) {
-        this.setState({ valor: event.target.value })
+    function controlarCambios(event){
+        setValor(event.target.value)
     }
 
-
-    render() {
-        return (
+    return (
             <>
-                <form className="search-form" onSubmit={(event) => this.evitarSubmit(event)} >
-                    <input type="text" placeholder="Buscar..." onChange={(event) => this.controlarCambios(event)} value={this.state.valor} />
+                <form className="search-form" onSubmit={(event) => evitarSubmit(event)} >
+                    <input type="text" placeholder="Buscar..." onChange={(event) => controlarCambios(event)} value={valor} />
                     <button type="submit" className="btn btn-success btn-sm">Buscar</button>
                 </form>
             </>
         )
-
-
-    }
 }
 
 export default withRouter(Buscador);
